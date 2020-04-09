@@ -11,7 +11,7 @@
 
     <div id="FIOREVER">
       <el-row>
-        <img src="../../assets/homePage/acs.png" alt="">
+        <img :src="HomeContentList.HomeBannerImg">
       </el-row>
 
       <h1>FIOREVER咏绽系列珠宝</h1>
@@ -20,47 +20,51 @@
       <div id="concentration">
         
         <h2 id="concentration_Title">为您精选的作品</h2>
-        <!-- 走马灯 -->
-        <el-row type="flex" justify="center">
-          <el-col :span="18">
-            <el-carousel type="card" id="FIOREVER-session2" height="500px">
-              <el-carousel-item
-                v-for="(list,index) in carouselImgList"  
-                :key="index">
-
-                <router-link to="/">
-                  <img :src="list.url" alt="list.description">
-                  <p>{{list.description}}</p>
-                </router-link>
-                
-              </el-carousel-item>
-            </el-carousel>
-          </el-col>
-        </el-row>
-
         
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+
+            <div 
+              class="swiper-slide"
+              v-for="(item,index) in HomeContentList.swiperList"  
+              :key="index">
+              <router-link to="/">
+                <img 
+                  :src="item.img" 
+                  :alt="item.productName">
+                <p>{{item.productName}}</p>
+              </router-link>
+            </div>
+
+          </div>
+
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+
         <el-row id="FIOREVER-session2" type="flex" justify="center">
           <el-col :span="14">
-            <img style="width: 100%;height: auto;" src="../../assets/homePage/Hero-840x500.jpg" alt="Hero-840x500.jpg">
+            <img 
+              :src="HomeContentList.FIOREVER.img" 
+              :alt="HomeContentList.FIOREVER.description">
           </el-col>
           <el-col :span="10" style="margin: auto 0;">
-            <p>
-                Fiorever咏绽系列象征着罗马人对生活的热情，是对自然之美的真挚歌颂。Fiorever咏绽系列珠宝搭配灵动上扬的密镶钻石花瓣，为自由不羁的女性特别设计，散发着令人难以抵挡的乐观精神与蓬勃朝气。
-            </p>
-            <router-link to="/">选购FIOREVER咏绽系列珠宝</router-link>
+            <p>{{HomeContentList.FIOREVER.description}}</p>
+            <router-link to="/">{{HomeContentList.FIOREVER.shopBtn}}</router-link>
           </el-col>
         </el-row>
 
       </div>
 
-      <div height="400px"></div>
-
     </div>
-
   </div>
 </template>
 
 <script>
+import Swiper from "swiper"
+import "../../../node_modules/swiper/css/swiper.css"
+import "../../../node_modules/swiper/js/swiper.min.js"
+import '@/mock/homeContent/HomeContent.js'
 export default {
   name: 'HomeContent',
   data(){
@@ -78,44 +82,67 @@ export default {
         }
       ],
       //img地址需要require才能获取的到url路径
-      carouselImgList: [
-        {
-          url: require('../../assets/homePage/carousel/carousel1.png'),
-          description: 'Fiorever咏绽系列 项链'
+      //超过三级的JSON需要写出来的，不然在渲染template时会报错，无法获取到最下级的属性
+      HomeContentList: {
+        FIOREVER: {
+        img: '',
+        description: '',
+        shopBtn: ''
         },
-        {
-          url:  require('../../assets/homePage/carousel/carousel2.png'),
-          description: 'Fiorever咏绽系列 项链'
-        },
-        {
-          url:  require('../../assets/homePage/carousel/carousel3.png'),
-          description: 'Fiorever咏绽系列 项链'
-        },
-        {
-          url:  require('../../assets/homePage/carousel/carousel4.png'),
-          description: 'Fiorever咏绽系列 项链'
-        },
-        {
-          url:  require('../../assets/homePage/carousel/carousel5.png'),
-          description: 'Fiorever咏绽系列 项链'
-        },
-      ]
+      },
     }
+  },
+  methods: {
+    initSwiper: function() {
+      new Swiper('.swiper-container', {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        loop : true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    }
+  },
+  created(){
+    this.$Axios.get('/HomeContentList')
+      .then(res => {
+        let data = res.data;
+        for (let key in data) {
+          if (key == "HomeBannerImg") {
+           // debugger;
+            data[key] = require(`../../assets/homePage/${data['HomeBannerImg']}.png`);
+          }
+          else if(key == "swiperList") {
+            data[key].forEach((v,i) => {
+              data[key][i].img = require(`../../assets/homePage/carousel/${v.img}.png`);
+            })
+          }
+          else if(key == "FIOREVER") {
+            data[key].img = require(`../../assets/homePage/${data[key].img}.jpg`);
+          }
+        }
+        this.HomeContentList = { ...this.HomeContentList, ...data };
+        console.log(data)
+        this.$nextTick(() => {
+          this.initSwiper();
+        })
+      })
+  },
+  mounted() {
+    
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-img{
-  width: 100%;
-  height: 100%;
-}
 .color(){
   color: #cba177;
 }
 #HomeContent{
-  padding-top: 180px;
+  padding-top: 162px;
 
   #hotWord{
     padding: 10px;
@@ -129,7 +156,7 @@ img{
     }
     img{
       width: 100%;
-      height: 500px;
+      height: 100%;
     }
   }
 
@@ -160,31 +187,24 @@ img{
         padding: 12px 0;
       }
 
-      .el-carousel__item {
-          a {
-            text-decoration: none;
-            img{
-              height:80%;
-              background: #f0ede8;
-            }
-
-            p{
-              font-size: 22px;
-              padding: 10px;
-            }
-
+      .swiper-container{
+        .swiper-slide{
+          img{
+            background: #f0ede8;
+          }
+          p{
+            padding: 10px 0;
+            font-size: 20px;
           }
         }
-
-      .el-carousel /deep/ .el-carousel__indicators--outside{
-        display: none;
       }
 
       #FIOREVER-session2 {
-            padding-bottom: 20px;
+        padding: 40px 0;
+        margin-bottom: 50px;
         > .el-col {
           p {
-            padding-bottom: 28px;
+            padding: 30px;
           }
 
           a {

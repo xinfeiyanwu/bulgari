@@ -21,23 +21,24 @@
                 <el-row>
                     <el-col><p>手机号码</p></el-col>
                     <el-col class="number">
-                        <input 
-                            type="text" 
+                        <el-input 
                             id="number" 
                             placeholder="请输入11位手机号码" 
                             ref="number"
                             v-model="number"
-                            @focus="hiddenNotice">
+                            @focus="hiddenNotice" >
+                        </el-input>
+
                     </el-col>
                     <el-col class="numberNotice"><p ref="numberNotice" v-text="numberNoticeText">请输入11位手机号码</p></el-col>
                     <el-col><p>密码</p></el-col>
                     <el-col class="psw">
-                        <input 
+                        <el-input 
                             ref="psw"
-                            type="psword" 
                             placeholder="请输入您的密码" 
                             v-model="psw"
-                             @focus="hiddenNotice">
+                            @focus="hiddenNotice"
+                            show-password></el-input>
                     </el-col>
                     <el-col class="pswNotice"><p ref="pswNotice" v-text="pswNoticeText">请输入您的密码</p></el-col>
                     <el-col class="remember">
@@ -50,9 +51,9 @@
                             @click="login"
                             id="loginBtn">登录</button>
                     </el-col>
-                    <el-col style="padding-bottom: 48px;">
+                    <el-col class="registerNow">
                         还没有账号？
-                        <router-link to="/userOper/register/" style="text-decoration: underline">即刻注册</router-link>
+                        <router-link to="/userOper/register/">即刻注册</router-link>
                     </el-col>
                 </el-row>
                 
@@ -77,8 +78,10 @@ export default {
     },
     methods: {
         login(){
-            if(this.number == '' || this.psw == ''){
+            if(this.number == '' ) {
                 this.numberNoticeText='请输入11位手机号码';
+            }
+            if(this.psw == '') {
                 this.pswNoticeText='请输入您的密码';
             }
         },
@@ -193,6 +196,13 @@ export default {
             padding: 8px 33px;
             margin: 6px 0; 
             cursor: pointer;   
+        }
+
+        .registerNow{
+            padding-bottom: 48px;
+            a{
+                text-decoration: underline
+            }
         }
     }
 }

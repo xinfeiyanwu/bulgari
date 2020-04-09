@@ -25,7 +25,7 @@ export default {
                 {
                     title: '售后服务',
                     url: require('../../../../assets/header/serve/3.after-sales-service.jpg'),
-                     explorePath: '/headerPlugIn/Serve/ServeDetail'
+                     explorePath: '/headerPlugIn/Serve/ServeDetail/ServeJewell/珠宝'
                 },
                 {
                     title: '查找店铺',
