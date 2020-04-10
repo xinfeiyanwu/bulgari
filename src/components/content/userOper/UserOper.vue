@@ -27,6 +27,7 @@ export default {
         position: relative;
         border-bottom: 1px solid #ae9477;
         padding: 25px 0 ;
+            font-size: 30px;
         img{
             position: absolute;
             width: 27px;

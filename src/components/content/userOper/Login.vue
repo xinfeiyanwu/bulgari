@@ -22,7 +22,6 @@
                     <el-col><p>手机号码</p></el-col>
                     <el-col class="number">
                         <el-input 
-                            id="number" 
                             placeholder="请输入11位手机号码" 
                             ref="number"
                             v-model="number"

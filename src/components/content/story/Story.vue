@@ -2,12 +2,17 @@
     <div class="Story">
 
         <div class="storyNav">
-            <router-link to="/story/" style="color: #cba177;">故事</router-link>
-            <router-link to="/story/">最新活动</router-link>
-            <router-link to="/story/">生活方式</router-link>
+            <router-link v-for="(item, i) in storyNav"
+                :to="'/story/'+item.type" 
+                :key="i"
+                :class="{Active: isActive(item.type)}"
+                @click.native="getDataList(item.type)"
+            >
+                {{item.name}}
+            </router-link>
         </div>
 
-        <div class="storyCover">
+        <div class="storyCover" v-if="this.$route.params.type=='story'">
             <video 
             src="../../../assets/homePage/story/lib-cinemagia-videocut.mp4"
             muted
@@ -24,15 +29,21 @@
         <!-- 解决的方法是限定col的最小高度,使用flex让img和vedio等比例缩放 -->
         <div class="storyDetail">
             <el-row>
-                <template v-for="(item, index) in storyList">
+                <template v-for="(item, index) in dataList">
                     <el-col  
                         :span="item.span"
                         :key="index">
                         <!-- 利用item.load判断router-link的标签 -->
-                        <router-link :to="item.JumpRoute" :tag="item.load?'div':'a'" class="link">
-                            <img :src="item.url" alt="item.url" v-if="item.type=='img'">
+                        <router-link 
+                            :to="item.JumpRoute" 
+                            :tag="item.load?'div':'a'" 
+                            class="link">
+                            <img 
+                                :src="require('../../../assets/homePage/story/'+item.ImgUrl+'.jpg')" 
+                                :alt="item.url" 
+                                v-if="item.type=='img'">
                             <video 
-                                :src="item.url"
+                                :src="require('../../../assets/homePage/story/'+item.ImgUrl+'.mp4')"
                                 v-else-if="item.type=='video'"
                                 autoplay
                                 muted
@@ -57,183 +68,50 @@
 </template>
 
 <script>
+import '@/mock/story/story.js'
+import '@/mock/story/activity.js'
+import '@/mock/story/lifeType.js'
 export default {
     name: 'Story',
     data(){
         return {
-            storyList: [
+            dataList: [],
+            Active: false,
+            storyNav: [
                 {
-                    span: 6,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-1.jpg'),
-                    p: '生活方式', 
-                    load: true,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
+                    type: 'story',
+                    name: '故事',
                 },
                 {
-                    span: 6,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-2.jpg'),
-                    p: '生活方式', 
-                    load: false, 
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
+                    type: 'activity',
+                    name: '最新活动',
                 },
                 {
-                    span: 12,
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-3.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
-                {
-                    span: 6,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-4.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
-                {
-                    span: 6,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-5.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
-                {
-                    span: 12,
-                    type: 'video',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/COVER_MFW_1920x1080.mp4'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
-                {
-                    span: 6,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-6.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
-                {
-                    span: 6,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-7.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
-                {
-                    span: 6,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-8.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
-                {
-                    span: 6,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-9.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
-                {
-                    span: 6,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-10.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
-                {
-                    span: 6,                    
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-11.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
-                {
-                    span: 6,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-12.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
-                {
-                    span: 6,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-13.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
-                {
-                    span: 6,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-14.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                }, 
-                {
-                    span: 6,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-15.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
-                {
-                    span: 12,                     
-                    type: 'img',
-                    JumpRoute: '/',
-                    url: require('../../../assets/homePage/story/story-16.jpg'),
-                    p: '生活方式', 
-                    load: false,
-                    h3: 'BVLGARI TOUCH',
-                    h4: '颠覆性新科技',
-                },
+                    type: 'lifeType',
+                    name: '生活方式',
+                }
             ]
         }
+    },
+    methods: {
+        isActive(type){
+            return this.$route.params.type==type?true:false;
+        },
+        getDataList(type){
+            this.$Axios.get(`/story`,{
+                params: {type}
+            }).then((res) => {
+                let data = res.data;
+                this.dataList = data;
+                //console.log(this.storyList)
+            })
+        }
+    },
+    created(){
+        this.getDataList('story');
+    },
+    mounted(){
+        //console.log(this.$route)
     }
 }
 </script>
@@ -259,6 +137,10 @@ export default {
         }
     }
 
+    .Active{
+        color: rgb(203, 161, 119);
+    }
+
     .storyCover{
         position: relative;
         text-align: center;
@@ -272,9 +154,11 @@ export default {
                 font-weight: 200;
             }
             .knowMore{
+                display: inline-block;
+                margin-top: 40px;
+                padding: 10px 61px;
                 border: none;
                 background: #fff;
-                padding: 10px 61px;
                 cursor: pointer;
             }
             .knowMore:hover{
@@ -290,7 +174,7 @@ export default {
         margin: 20px 20px 0 40px;
         .el-col{
             padding-right: 20px;
-            min-height: 300px;
+            min-height: 500px;
             .link{
                 display: flex;
                 flex-direction: column;

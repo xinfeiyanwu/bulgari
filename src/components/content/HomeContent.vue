@@ -1,13 +1,13 @@
 <template>
   <div id="HomeContent">
-    <div id="hotWord">
+    <!-- <div id="hotWord">
      <h5 
         v-for="(item, index) in hotWordArr" 
         :key="index">
           <router-link :to="item.link">{{item.linkWord}}</router-link>
           {{item.word}}
       </h5>
-    </div>
+    </div> -->
 
     <div id="FIOREVER">
       <el-row>
@@ -138,20 +138,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.color(){
-  color: #cba177;
-}
 #HomeContent{
-  padding-top: 162px;
+  padding-top: 175px;
 
   #hotWord{
     padding: 10px;
     h5{
       text-align: center;
       font-size: 14px;
-      .color();
+      color: #cba177;
       a{ 
-        .color();
+        color: #cba177;
       }
     }
     img{

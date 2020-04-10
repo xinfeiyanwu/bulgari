@@ -4,6 +4,7 @@ import Home from '../components/Home.vue'
 import HomeContent from '../components/content/HomeContent.vue'
 import UserOper from '../components/content/userOper/UserOper.vue'
 import Register from '../components/content/userOper/Register.vue'
+import CompleteData from '../components/content/userOper/CompleteData.vue'
 import Login from '../components/content/userOper/Login.vue'
 import HeaderPlugIn from '../components/content/headerPlugIn/HeaderPlugIn.vue'
 import SearchShop from '../components/content/headerPlugIn/SearchShop.vue'
@@ -33,7 +34,7 @@ const routes = [
       },
       //故事
       {
-        path: '/story/',
+        path: '/story/:type',
         name: 'Story',
         component: Story
       },
@@ -59,6 +60,11 @@ const routes = [
             path: '/userOper/register/',
             name: 'Register',
             component: Register,
+          },
+          {
+            path: '/userOper/CompleteData/',
+            name: 'CompleteData',
+            component: CompleteData,
           },
           {
             path: '/userOper/Login/',

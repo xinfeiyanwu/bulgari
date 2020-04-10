@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 
 const contentNav = [
     { type:'bvlgari', name: 'bvlgari品牌', path: false },
-    { type:'story', name: '故事', path: '/story/' },
+    { type:'story', name: '故事', path: '/story/story' },
     { type:'highJewellery', name: '高级珠宝', path: false },
     { type:'Jewellery', name: '珠宝', path: false },
     { type:'BRIDAL', name: 'BRIDAL系列', path: false },

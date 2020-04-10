@@ -5,8 +5,8 @@
                 <el-col :key="index" :span="7">
                     <el-row>
                         <el-col :span="10" :class="{pictureShow:true,clearMargin: index==1}">
-                            <img :src="pictureShowUrl_left" alt="" v-if="index==0">
-                            <img :src="pictureShowUrl_right" alt="" v-else>
+                            <img :src="pictureShowUrl_left" alt="pictureShowUrl_left" v-if="index==0">
+                            <img :src="pictureShowUrl_right" alt="pictureShowUrl_left" v-else>
                         </el-col>
                         <el-col class="ProductList" :span="14">
                             <h5>{{item.ProductSortType}}</h5>
