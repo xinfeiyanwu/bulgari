@@ -1,5 +1,5 @@
 <template>
-  <div class="ShopingSelect">
+  <div class="ShoppingSelect">
     <div class="shopDescription">
         <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -59,30 +59,34 @@
                   :key="j" 
                   v-show="j < seeMoreLimit[i]"
                 >
-                  <div 
-                    :class="{
-                        'shopCategoryItem':true,
-                        'clearMargin': j+1%4==0&&j!=0
-                    }" 
-                  >   
-                    <img 
-                      class="cover" 
-                      :src="productList.ImgUrl" :alt="productList.type">
-                      <div 
-                        class="shopingInfo"
-                        ref="shopingInfo"
-                        @mouseenter="ShoppingInfoShow($event)" 
-                        @mouseleave="ShoppingShow($event)">
-                        <img class="inventory" src="../../../assets/header/inventory.png" alt="收藏">
-                        <router-link to="/">
-                          <p>{{productList.productType}}</p>
-                          <h5>{{productList.productName}}</h5>
-                          <strong>&#165; {{productList.cost}}</strong>
-                        </router-link>
+                    <div 
+                        :class="{
+                            'shopCategoryItem':true,
+                            'clearMargin': j+1%4==0&&j!=0
+                        }" 
+                    >   
+                        <img 
+                        class="cover" 
+                        :src="productList.ImgUrl" :alt="productList.type">
+                        <div 
+                            class="shopingInfo"
+                            ref="shopingInfo"
+                            @mouseenter="ShoppingInfoShow($event)" 
+                            @mouseleave="ShoppingShow($event)"
+                        >
+                            <img class="inventory" src="../../../assets/header/inventory.png" alt="收藏">
+                            <div 
+                                class="shoppingInfo">
+                                <div class="jump" @click="jumpShopping(productList.productSeriesName)">
+                                    <p>{{productList.productType}}</p>
+                                    <h5>{{productList.productSeriesName}}</h5>
+                                </div>
+                                <strong>&#165; {{productList.cost}}</strong>
+                            </div>
 
-                        <div class="search">探索</div>
-                      </div>
-                  </div>
+                            <div class="search" @click="jumpShopping(productList.productSeriesName)">探索</div>
+                        </div>
+                    </div>
                 </el-col>
 
                 <el-col 
@@ -112,7 +116,7 @@ import Vue from 'vue'
 import '@/mock/shop/SeriesProduct.js'
 import '@/mock/shop/menuDataList.js'
 export default {
-    name: "ShopingSelect",
+    name: "ShoppingSelect",
     components: {Menu},
     data(){
         return {
@@ -137,15 +141,26 @@ export default {
         seeMoreProduct(limit,i){
           Vue.set(this.seeMoreLimit, i, limit)
           //console.log(i, limit)
+        },
+        jumpShopping(productSeriesName){
+            this.$router.push({
+                path:'/Shopping',
+                query: {
+                        ProductSortNavName: this.$route.params.ProductSortNavName,
+                        ProductSortType: this.$route.params.ProductSortType,
+                        ProductType: this.$route.params.ProductType,
+                        productSeriesName,
+                    }
+            })
         }
     },
     created(){
-        this.$Axios.get('/ShopingSelect/menuDataList')
+        this.$Axios.get('/ShoppingSelect/menuDataList')
             .then((responese) => {
                 this.menuDataList = responese.data;
             })
             
-        this.$Axios.get('/ShopingSelect/SeriesProduct')
+        this.$Axios.get('/ShoppingSelect/SeriesProduct')
           .then((responese) => {
             let data = responese.data;
             
@@ -174,7 +189,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.ShopingSelect {
+.ShoppingSelect {
     margin-top: 176px;
 
     .shopDescription {
@@ -260,17 +275,20 @@ export default {
                         cursor: pointer;
                     }
                     
-                    a {
-                        display: inline-block;
+                    .shoppingInfo {
                         width: 100%;
-                        p {
-                            font-size: 16px;
-                            color: #fff;
-                        }
-                        h5 {
-                            font-size: 30px;
-                            font-weight: 300;
-                            color: #fff;
+                        .jump{
+                            text-decoration: #fff underline;
+                            cursor: pointer;
+                            p {
+                                font-size: 16px;
+                                color: #fff;
+                            }
+                            h5 {
+                                font-size: 30px;
+                                font-weight: 300;
+                                color: #fff;
+                            }
                         }
                         strong{
                             color: #fff;    

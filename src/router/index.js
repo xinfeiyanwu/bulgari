@@ -17,7 +17,8 @@ import ServeJewell from '../components/content/headerPlugIn/serveDetial/ServeJew
 import ServeWatch from '../components/content/headerPlugIn/serveDetial/ServeWatch.vue'
 import Story from '../components/content/story/Story.vue'
 import HighJewellery from '../components/content/highJewellery/HighJewellery.vue'
-import ShopingSelect from '../components/content/shop/ShopingSelect.vue'
+import ShoppingSelect from '../components/content/shop/ShoppingSelect.vue'
+import Shopping from '../components/content/shop/Shopping.vue'
 
 Vue.use(VueRouter)
 
@@ -46,9 +47,15 @@ const routes = [
       },
       //选择购物类型
       {
-        path: '/ShopingSelect/:ProductSortNavName/:ProductSortType/:ProductType',
-        name: 'ShopingSelect',
-        component: ShopingSelect
+        path: '/ShoppingSelect',
+        name: 'ShoppingSelect',
+        component: ShoppingSelect
+      },
+      //购买商品
+      {
+        path: '/Shopping',
+        name: 'Shopping',
+        component: Shopping
       },
       //用户信息操作
       {

@@ -13,7 +13,7 @@
                             <ul>
                                 <li v-for="(ProductType, index_1) in item.ProductList" :key="index_1">
                                      <span 
-                                        @click="jumpShopingSelect(item.ProductSortType, ProductType.type)"
+                                        @click="jumpShoppingSelect(item.ProductSortType, ProductType.type)"
                                         @mouseenter="pictureShowHandle(index, index_1)">{{ProductType.type}}
                                     </span>
                                 </li>
@@ -48,10 +48,10 @@ export default {
 
         
         },
-        jumpShopingSelect(ProductSortType, ProductType){
+        jumpShoppingSelect(ProductSortType, ProductType){
             this.$router.push({
-                name: 'ShopingSelect',
-                params: {
+                path: 'ShoppingSelect',
+                query: {
                     ProductSortNavName: this.ProductSortNavName,
                     ProductSortType,
                     ProductType

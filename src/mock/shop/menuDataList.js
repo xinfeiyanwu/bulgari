@@ -63,4 +63,4 @@ const menuDataList = [
     },
 ]
 
-export default Mock.mock('/ShopingSelect/menuDataList', 'get', menuDataList)
+export default Mock.mock('/ShoppingSelect/menuDataList', 'get', menuDataList)
