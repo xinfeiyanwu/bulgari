@@ -40,7 +40,7 @@
                     @mouseenter.native="showLoginModel">
                     <router-link to="/userOper/Login/">登录</router-link> /
                     <router-link to="/userOper/register/">注册</router-link>
-                    <LoginModel />
+                    <LoginModel  v-if="this.$store.state.loginModel.loginModelState"/>
                 </el-col>
                 <el-col :span="8">
                     <router-link to="/">
@@ -81,7 +81,7 @@
                 {{item.name}}
             </span>
          </template>
-         <ProductSort v-if="this.$store.state.ProductSortState"/>
+         <ProductSort v-if="this.$store.state.ProductSort.ProductSortState"/>
      </div>
    </div>
 </template>
@@ -101,15 +101,13 @@ export default {
     },
     methods:{
         showLoginModel(){
-            //debugger;
-            this.$store.dispatch('showLoginModel', true)
+            this.$store.dispatch('showLoginModel')
         },
         isShowSearch(){
             this.ShowSearchState=!this.ShowSearchState;
         },
         ShowProductSort(type, name){
             this.$store.dispatch('showProductSort', {
-                state: true,
                 ProductSortObj: {
                     ProductSortNavType: type,
                     ProductSortNavName: name,
@@ -117,7 +115,7 @@ export default {
             });
         },
         hiddenProductSort(){
-            this.$store.dispatch('hiddenProductSort', false);
+            this.$store.dispatch('hiddenProductSort');
         }
     },
     created(){
@@ -127,6 +125,9 @@ export default {
                 this.contentNav = data;
                 //console.log(response);
             })
+    },
+    mounted(){
+        console.log(this.$store.state)
     }
 }
 </script>

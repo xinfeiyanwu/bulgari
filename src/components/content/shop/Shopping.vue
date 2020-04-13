@@ -3,10 +3,10 @@
         <div class="shopOper">
             <el-breadcrumb separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>{{this.$route.params.ProductSortNavName}}</el-breadcrumb-item>
-                <el-breadcrumb-item>{{this.$route.params.ProductSortType}}</el-breadcrumb-item>
-                <el-breadcrumb-item>{{this.$route.params.ProductType}}</el-breadcrumb-item>
-                <el-breadcrumb-item>{{this.$route.params.productSeriesName}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{this.$route.query.ProductSortNavName}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{this.$route.query.ProductSortType}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{this.$route.query.ProductType}}</el-breadcrumb-item>
+                <el-breadcrumb-item>{{this.$route.query.productSeriesName}}</el-breadcrumb-item>
             </el-breadcrumb>
 
             <el-row>
@@ -21,7 +21,7 @@
                         <p class="proIntroduction">“BVLGARI BVLGARI”炭黑钻石色和鲜绿色粒面小牛皮男士拉链钱夹，炭黑钻石色小羊皮内衬。经典标识配饰，采用镀钯黄铜材质。</p>
                         <div class="Coin">&#165; 5,100</div> 
                         <div class="numSelect">
-                            <select name="" id="">
+                            <select name="" id="" style="    height: 33px;">
                                 <option value="">1</option>
                                 <option value="">2</option>
                                 <option value="">3</option>
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="addShoppingCar">添加到购物袋</div>
-                        <div class="bookanappointment">精品店服务</div>
+                        <div class="bookanappointment"  @click="selectServe=true">精品店服务</div>
                         <div class="findStore">
                             <a href="" title="寻找附近店铺">寻找附近店铺</a>
                         </div>
@@ -51,14 +51,111 @@
                             <i class="el-icon-chat-dot-square"></i>
                         </div>
                     </div>
-
-                    <div class="shoppingContent">
-                        <div class="contTitle">
-
-                        </div>
-                    </div>
                 </el-col>
             </el-row>
+        </div>
+
+        <div class="shoppingContent">
+            <el-tabs v-model="tabs1">
+                <el-tab-pane label="描述" name="detail">
+                    <h3>钱包</h3>
+                    <p>
+						此款手持钱夹以乳蛋白石色金属质感水蛇皮和乳蛋白石色小牛皮制成，饰有镌刻“BVLGARI BVLGARI”标识的浅金镀金黄铜环扣。九个信用卡卡位，两个纸币隔层，一个拉链零钱包。19 x 9 cm. - 7.5 x 3.5"
+                    </p>
+                </el-tab-pane>
+                <el-tab-pane label="宝格丽配饰" name="Acc">
+                    <p>Bulgari宝格丽皮具及配饰均在意大利制造    </p>
+                </el-tab-pane>
+            </el-tabs>
+        </div>
+        
+        <div class="relevCont">
+            <el-tabs v-model="tabs2" class="relevContPadding">
+                <el-tab-pane label="相关产品" name="relaevPro">
+                    <div class="swiper-container Banner1" style="width: 80%;">
+                        <div class="swiper-wrapper">
+                            <div 
+                                class="swiper-slide"
+                                v-for="(item,index) in 6"  
+                                :key="index">
+                                <img src="@/assets/shop/relevShop/289101_002.png" alt="">
+                                <div class="itemDetail" @mouseleave="leaveDetail($event)" @mouseenter="lookDetail($event)">
+                                    <div>
+                                        <h4 class="itemName">
+                                            <router-link to="/">
+                                                BVLGARI BVLGARI系列<br>
+                                                名片夹
+                                            </router-link>
+                                        </h4>
+                                        <p><span>编号</span> <strong>287612</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-prev" style="outline: none;left: 74px;"></div>
+                    <div class="swiper-button-next" style="outline: none;right: 72px;"></div>
+                </el-tab-pane>
+                <el-tab-pane label="更多种类" name="moreSort">
+                    <div class="moreSort">
+                        <div class="moreSortItem" v-for="item in 3" :key="item">
+                            <img src="@/assets/shop/relevShop/289101_002.png" alt="">
+                            <div class="itemDetail" @mouseleave="leaveDetail($event)" @mouseenter="lookDetail($event)">
+                                <div>
+                                    <h4 class="itemName">
+                                        <router-link to="/">
+                                            BVLGARI BVLGARI系列<br>
+                                            名片夹
+                                        </router-link>
+                                    </h4>
+                                    <p><span>编号</span> <strong>287612</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </el-tab-pane>
+            </el-tabs>
+        </div>
+
+        <div class="latelyLook">
+            <div class="latelyLookTitle">
+                <h3>最近浏览</h3>
+            </div>
+            <div class="swiper-container Banner1" style="width: 80%;">
+                <div class="swiper-wrapper">
+                    <div 
+                        class="swiper-slide"
+                        v-for="(item,index) in 6"  
+                        :key="index">
+                        <img src="@/assets/shop/relevShop/289101_002.png" alt="">
+                        <div class="itemDetail" @mouseleave="leaveDetail($event)" @mouseenter="lookDetail($event)">
+                            <div>
+                                <h4 class="itemName">
+                                    <router-link to="/">
+                                        BVLGARI BVLGARI系列<br>
+                                        名片夹
+                                    </router-link>
+                                </h4>
+                                <p><span>编号</span> <strong>287612</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-prev" style="outline: none;left: 74px;"></div>
+            <div class="swiper-button-next" style="outline: none;right: 72px;"></div>
+
+            <div class="MoreGiftBox">
+                <div class="MoreGiftBoxLeft">
+                    <router-link to="/"><img src="@/assets/shop/relevShop/cms_vis_txt_img_desktop_6253_v_4.jpg" alt=""></router-link>
+                </div>
+                <div class="MoreGiftBoxRight">
+                    <div>
+                        <h5>每个作品均附有独立的精美包装</h5>
+                        <router-link to="/" class="konwMore">了解更多</router-link>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
@@ -66,7 +163,6 @@
         <el-dialog
             :visible.sync="giftBoxSelState"
             width="53%"
-            :show-close="false"
             center>
 
             <div class="giftSelBox">
@@ -76,6 +172,7 @@
                 <div class="giftSel">
                     <img 
                         @click="selectGiftBox($event)"
+                        class="selected"
                         ref="giftBox1"
                         data-giftBoxTpye="giftBoxTpye1"
                         src="@/assets/shop/giftBoxImg/CLASSIC1.png" alt="">
@@ -109,19 +206,34 @@
                 <p><i>4.</i> <span>任何疑问请您随时致电宝格丽顾客服务中心400-000-6699，或联系在线客服。</span></p>
             </div>
         </el-dialog>
+        <el-dialog
+            title="请选择精品店服务"
+            :visible.sync="selectServe"
+            width="30%"
+            center>
+            <h1><img src="../../../assets/header/stars.png" alt="欢迎来到宝格丽的世界"></h1>
+            <button class="toStoreshop">到店自取</button>
+            <button class="appointment">预约到店</button>
+        </el-dialog>
     </div>
 </template>
 
 <script>
+import Swiper from "swiper"
+import "../../../../node_modules/swiper/css/swiper.css"
+import "../../../../node_modules/swiper/js/swiper.min.js"
 export default {
     name: 'Shopping',
     data(){
         return {
             giftBoxSelState: false,
             NoticeState: false,
+            selectServe: false,
             giftDisplaySrc: "",
             defaultGiftBox: 'giftBoxTpye1',
-            GiftBoxHidden: true
+            GiftBoxHidden: true,
+            tabs1: 'detail',
+            tabs2: 'relaevPro'
         }
     },
     methods: {
@@ -141,23 +253,78 @@ export default {
         modifyHandle(){
             this.giftBoxSelState = true;
             this.GiftBoxHidden = true;
+        },
+        lookDetail(ev){
+           ev.target.className += ' opacity';
+        },
+        leaveDetail(ev){
+           ev.target.className = 'itemDetail';
         }
     },
     beforeCreate(){
 
     },
     mounted(){
-        
+        const Banner1 = new Swiper('.Banner1', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: '.swiper-button-prev',
+                prevEl: '.swiper-button-next',
+            },
+        });
+        console.log(Banner1)
     }
 }
 </script>
 
 <style lang="less">
+//public class
+.Btn() {
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;;
+    cursor: pointer
+}
+.BtnHover() {
+    background: #000;
+    color: #fff;
+}
+.itemDetail{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #2c2c2c;
+    opacity: 0;
+    filter: Alpha(opacity=0);
+    .itemName{
+        text-align: center;
+        a{
+            color: #fff;
+            font-size: 22px;
+        }
+    }
+    p{
+        word-spacing: 4px;
+        padding-top: 35px;
+        text-align: center;
+    }
+}
+.opacity{
+    opacity: 1;
+    filter: Alpha(opacity=100);
+}
+
 .Shopping{
-    padding-top: 175px;
+    padding-top: 160px;
     .shopOper{
         background: #f0ede8;
-        padding: 20px 0 60px 30px;
+        padding: 30px 0 60px 30px;
 
         .shoppingInfo{
             width: 440px;
@@ -223,6 +390,7 @@ export default {
             }
             .addShoppingCar{
                 margin-top: 20px;
+                max-width: 440px;
                 padding: 10px;    
                 background: #000;
                 color: #fff;
@@ -231,9 +399,13 @@ export default {
             .bookanappointment{    
                 margin-top: 10px;
                 padding: 10px;
-                color: #7f7f7f;
                 border: 1px solid #000;
+                color: #7f7f7f;
                 cursor: pointer;
+            }
+            .bookanappointment:hover {
+                background: #000;
+                color: #fff;
             }
             .findStore{
                 color: #000;
@@ -262,64 +434,190 @@ export default {
         }
     }
 
-    .el-dialog .el-dialog__body {
-        padding: 0 40px 40px !important;
-        height: 50vh;
-        overflow-y: scroll;
-        h1 {   
-            margin: 16px 0;
-            position: relative;
-            border-bottom: 1px solid #ae9477;
-            font-size: 30px;
-            img{
-                position: absolute;
-                width: 27px;
-                height: 27px;
-                left: 47%;
-                bottom: -15px;
-            }
-        }
-
-        .text{
-            p{padding-bottom: 16px;}
-        }
-
-        .giftSelBox{
+    .shoppingContent, .relevCont{
+        .el-tabs__nav-scroll {
             display: flex;
             justify-content: center;
-            img{
-                background: #f0ede8;
-                display: block;
-                    height: 100%;
+            padding-top: 30px;
+            .el-tabs__nav{
+                .el-tabs__item {
+                    padding: 0 50px;
+                    color: #ccc;
+                }
+                .el-tabs__active-bar {
+                    background: #ccc;
+                }
+
+                .active{
+                    background: #000;
+                    color: #000;
+                }
             }
-            
-            .giftDisplay{
-                width: 294px;
-                height: 344px;
+        }
+        .el-tabs__nav-wrap::after{
+            height: 0;
+        }
+        
+    }
+
+    .shoppingContent{
+        border-bottom: 1px solid #ccc;
+        
+        .el-tabs__content{
+            .el-tab-pane{
+                text-align: center; 
+                h3{
+                    font-size: 20px;
+                    font-weight: 400;
+                    padding: 20px 0 30px;
+                }
+
+                p{
+                    font-size: 17px;
+                    padding: 0 15% 29px;
+                    line-height: 1.8;
+                }
             }
-            .giftSel{    
-                margin: 0 0 6px 6px;
-                width: 150px;
-                height: 110px;
-                img{
-                    margin-bottom: 4px;
-                    border: 1px solid transparent;
+        }
+    }
+
+    .relevContPadding{
+        padding-top: 15px;
+        .el-tabs__content{
+            padding-top: 30px;
+            .swiper-container{
+                .swiper-slide{
+                    position: relative;
+                    background: #f0ede8;
+                    cursor: pointer;
+                }
+                --swiper-navigation-color: #00ff33;/* 单独设置按钮颜色 */
+                --swiper-navigation-size: 30px;/* 设置按钮大小 */
+            }
+
+            .moreSort{
+                display: flex;
+                margin: 0 auto;
+                width: 80%;
+                .moreSortItem{
+                    margin-right: 30px;
+                    position: relative;
+                    flex-grow: 1;
+                    background: #f0ede8;
                     cursor: pointer;
                 }
             }
-            .selected{
-                border: 1px solid #ae9477 !important;
+        }
+    }
+
+    .latelyLook{
+        .latelyLookTitle{
+            text-align: center;
+            h3{
+                padding: 40px 0 30px;
+            }
+        }
+
+        .MoreGiftBox{
+            display: flex;
+            align-items: center;
+            .MoreGiftBoxLeft{
+                flex-grow: 1;
+                max-width: 50%;
+                img{
+                    width: 100%;
+                }
+            }
+            .MoreGiftBoxRight{
+                flex-grow: 1;
+                text-align: center;
+                h5{
+                    font-size: 20px;
+                }
+                .konwMore{
+                    padding: 10px 100px;
+                    border: 1px solid #000;
+                    display: inline-block;
+                    margin-top: 20px;
+                }
+                .konwMore:hover{
+                    background: #000;
+                    color: #fff;
+                }
             }
         }
     }
-    .el-dialog__footer{
-    .submitGiftBox{
-        padding: 10px 50px; 
-        background: #000;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-    }
+
+    //弹窗
+    .el-dialog {
+        .el-dialog__body {
+            padding: 0 40px 40px !important;
+            h1 {   
+                margin: 16px 0;
+                position: relative;
+                border-bottom: 1px solid #ae9477;
+                font-size: 30px;
+                img{
+                    position: absolute;
+                    width: 27px;
+                    height: 27px;
+                    left: 50%;
+                    bottom: -15px;
+                    transform: translatex(-50%);
+                }
+            }
+
+            .text{
+                p{padding-bottom: 16px;}
+            }
+
+            .giftSelBox{
+                display: flex;
+                justify-content: center;
+                img{
+                    background: #f0ede8;
+                    display: block;
+                    height: 100%;
+                }
+                
+                .giftDisplay{
+                    width: 294px;
+                    height: 344px;
+                }
+                .giftSel{    
+                    margin: 0 0 6px 6px;
+                    width: 150px;
+                    height: 110px;
+                    img{
+                        margin-bottom: 4px;
+                        border: 1px solid transparent;
+                        cursor: pointer;
+                    }
+                }
+                .selected{
+                    border: 1px solid #ae9477 !important;
+                }
+            }
+
+            .toStoreshop, .appointment{
+                margin: 0 auto 10px;
+                display: block;
+                padding: 10px 100px;
+                .Btn()
+            }
+            .toStoreshop{
+                margin-top: 54px;
+            }
+        }
+        .el-dialog__footer{
+            .submitGiftBox{
+                padding: 10px 50px; 
+                background: #000;
+                color: #fff;
+                border: none;
+                cursor: pointer;
+            }
+        }
     }
 }
 

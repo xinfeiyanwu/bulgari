@@ -3,9 +3,9 @@
     <div class="shopDescription">
         <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>{{this.$route.params.ProductSortNavName}}</el-breadcrumb-item>
-            <el-breadcrumb-item>{{this.$route.params.ProductSortType}}</el-breadcrumb-item>
-            <el-breadcrumb-item>{{this.$route.params.ProductType}}</el-breadcrumb-item>
+            <el-breadcrumb-item>{{this.$route.query.ProductSortNavName}}</el-breadcrumb-item>
+            <el-breadcrumb-item>{{this.$route.query.ProductSortType}}</el-breadcrumb-item>
+            <el-breadcrumb-item>{{this.$route.query.ProductType}}</el-breadcrumb-item>
         </el-breadcrumb>
         <img src="../../../assets/shop/accessory/Serpenti/Banner.jpg" alt="">
         <h2>{{SeriesProduct.Description.title}}</h2>
@@ -146,9 +146,9 @@ export default {
             this.$router.push({
                 path:'/Shopping',
                 query: {
-                        ProductSortNavName: this.$route.params.ProductSortNavName,
-                        ProductSortType: this.$route.params.ProductSortType,
-                        ProductType: this.$route.params.ProductType,
+                        ProductSortNavName: this.$route.query.ProductSortNavName,
+                        ProductSortType: this.$route.query.ProductSortType,
+                        ProductType: this.$route.query.ProductType,
                         productSeriesName,
                     }
             })
@@ -179,6 +179,9 @@ export default {
             this.SeriesProduct = {...this.SeriesProduct, ...data};
             console.log(this.SeriesProduct)
           })
+    },
+    mounted(){
+        this.$store.dispatch('hiddenProductSort', false);
     },
     watch: {
         saleType: function(){
@@ -316,7 +319,7 @@ export default {
 
                 .opacity{
                     opacity: 1;
-                    filter: Alpha(opacity=1);
+                    filter: Alpha(opacity=100);
                 }
             }
 

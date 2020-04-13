@@ -75,7 +75,7 @@ export default {
             })
     },
     mounted(){
-        this.ProductSortNavName = this.$store.state.ProductSortObj.ProductSortNavName;
+        this.ProductSortNavName = this.$store.state.ProductSort.ProductSortObj.ProductSortNavName;
     }
 }
 </script>

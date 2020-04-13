@@ -32,8 +32,9 @@ export default {
             position: absolute;
             width: 27px;
             height: 27px;
-            left: 49%;
+            left: 50%;
             bottom: -15px;
+            transform: translatex(-50%);
         }
     }
      #userOperBox{

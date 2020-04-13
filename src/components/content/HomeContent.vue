@@ -21,7 +21,7 @@
         
         <h2 id="concentration_Title">为您精选的作品</h2>
         
-        <div class="swiper-container">
+        <div class="swiper-container" style="width: 80%;">
           <div class="swiper-wrapper">
 
             <div 
@@ -69,18 +69,18 @@ export default {
   name: 'HomeContent',
   data(){
     return {
-      hotWordArr: [
-        {
-          linkWord: '在线选购',
-          word: ' 全新2020春夏皮具与配饰系列作品。',
-          link: '/'
-        },
-        {
-          linkWord: '即刻探索',
-          word: '  2020迪拜#LVMH钟表周#',
-          link: '/'
-        }
-      ],
+      // hotWordArr: [
+      //   {
+      //     linkWord: '在线选购',
+      //     word: ' 全新2020春夏皮具与配饰系列作品。',
+      //     link: '/'
+      //   },
+      //   {
+      //     linkWord: '即刻探索',
+      //     word: '  2020迪拜#LVMH钟表周#',
+      //     link: '/'
+      //   }
+      // ],
       //img地址需要require才能获取的到url路径
       //超过三级的JSON需要写出来的，不然在渲染template时会报错，无法获取到最下级的属性
       HomeContentList: {
@@ -124,7 +124,7 @@ export default {
           }
         }
         this.HomeContentList = { ...this.HomeContentList, ...data };
-        console.log(data)
+        //console.log(data)
         this.$nextTick(() => {
           this.initSwiper();
         })

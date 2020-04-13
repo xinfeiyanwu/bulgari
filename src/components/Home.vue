@@ -22,7 +22,7 @@ export default {
   components: {Header,Footer},
   methods: {
     hiddenLoginModel(){
-        this.$store.dispatch('hiddenLoginModel', false)
+        this.$store.dispatch('hiddenLoginModel')
     },
   }
 }

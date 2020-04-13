@@ -37,7 +37,7 @@ const routes = [
       {
         path: '/story/:type',
         name: 'Story',
-        component: Story
+        component: Story,
       },
       //高级珠宝
       {
@@ -49,13 +49,13 @@ const routes = [
       {
         path: '/ShoppingSelect',
         name: 'ShoppingSelect',
-        component: ShoppingSelect
+        component: ShoppingSelect,
       },
       //购买商品
       {
         path: '/Shopping',
         name: 'Shopping',
-        component: Shopping
+        component: Shopping,
       },
       //用户信息操作
       {
@@ -139,7 +139,16 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition){
+    //savedPosition: 当点击浏览器前进后退按钮时，会记录下当前页面的位置，在跳转至下一页面时，停滞在上一个页面的位置上
+    if(savedPosition){
+      return savedPosition;
+    }
+    else{
+      return {x: 0,y: 0};
+    }
+  }
 })
 
 export default router
