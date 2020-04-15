@@ -66,8 +66,8 @@
                         }" 
                     >   
                         <img 
-                        class="cover" 
-                        :src="productList.ImgUrl" :alt="productList.type">
+                            class="cover" 
+                            :src="productList.ImgUrl" :alt="productList.type">
                         <div 
                             class="shopingInfo"
                             ref="shopingInfo"

@@ -93,8 +93,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-button-prev" style="outline: none;left: 74px;"></div>
-                    <div class="swiper-button-next" style="outline: none;right: 72px;"></div>
+                    <div class="swiper-button-prev relaevPro-prev" style="outline: none;left: 74px;"></div>
+                    <div class="swiper-button-next relaevPro-next" style="outline: none;right: 72px;"></div>
                 </el-tab-pane>
                 <el-tab-pane label="更多种类" name="moreSort">
                     <div class="moreSort">
@@ -121,29 +121,33 @@
             <div class="latelyLookTitle">
                 <h3>最近浏览</h3>
             </div>
-            <div class="swiper-container Banner1" style="width: 80%;">
-                <div class="swiper-wrapper">
-                    <div 
-                        class="swiper-slide"
-                        v-for="(item,index) in 6"  
-                        :key="index">
-                        <img src="@/assets/shop/relevShop/289101_002.png" alt="">
-                        <div class="itemDetail" @mouseleave="leaveDetail($event)" @mouseenter="lookDetail($event)">
-                            <div>
-                                <h4 class="itemName">
-                                    <router-link to="/">
-                                        BVLGARI BVLGARI系列<br>
-                                        名片夹
-                                    </router-link>
-                                </h4>
-                                <p><span>编号</span> <strong>287612</strong></p>
+            
+            <div class="latelyLookCont">
+                <div class="swiper-container Banner2" style="width: 80%;">
+                    <div class="swiper-wrapper">
+                        <div 
+                            class="swiper-slide"
+                            v-for="(item,index) in 6"  
+                            :key="index">
+                            <img src="@/assets/shop/relevShop/289101_002.png" alt="">
+                            <div class="itemDetail" @mouseleave="leaveDetail($event)" @mouseenter="lookDetail($event)">
+                                <div>
+                                    <h4 class="itemName">
+                                        <router-link to="/">
+                                            BVLGARI BVLGARI系列<br>
+                                            名片夹
+                                        </router-link>
+                                    </h4>
+                                    <p><span>编号</span> <strong>287612</strong></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="swiper-button-prev latelyLook-prev" style="outline: none;left: 74px;"></div>
+                <div class="swiper-button-next latelyLook-next" style="outline: none;right: 72px;"></div>
             </div>
-            <div class="swiper-button-prev" style="outline: none;left: 74px;"></div>
-            <div class="swiper-button-next" style="outline: none;right: 72px;"></div>
 
             <div class="MoreGiftBox">
                 <div class="MoreGiftBoxLeft">
@@ -159,7 +163,7 @@
         </div>
 
 
-        
+        <!-- //弹窗 -->
         <el-dialog
             :visible.sync="giftBoxSelState"
             width="53%"
@@ -229,17 +233,18 @@ export default {
             giftBoxSelState: false,
             NoticeState: false,
             selectServe: false,
-            giftDisplaySrc: "",
-            defaultGiftBox: 'giftBoxTpye1',
+            giftDisplaySrc: "", //选择礼盒后图片展示
+            GiftBoxType: 'giftBoxTpye1', //记录下礼盒的类型
             GiftBoxHidden: true,
             tabs1: 'detail',
             tabs2: 'relaevPro'
         }
     },
     methods: {
+        //选择礼盒
         selectGiftBox(ev){
             this.giftDisplaySrc = ev.target.src;
-            this.defaultGiftBox = ev.target.dataset.giftboxtpye;
+            this.GiftBoxType = ev.target.dataset.giftboxtpye;
             
             for(let v in this.$refs){
                 this.$refs[v].className = '';
@@ -259,21 +264,61 @@ export default {
         },
         leaveDetail(ev){
            ev.target.className = 'itemDetail';
-        }
+        },
     },
     beforeCreate(){
 
     },
     mounted(){
-        const Banner1 = new Swiper('.Banner1', {
+        new Swiper('.Banner1', {
             slidesPerView: 3,
             spaceBetween: 30,
             navigation: {
-                nextEl: '.swiper-button-prev',
-                prevEl: '.swiper-button-next',
+                nextEl: '.relaevPro-prev',
+                prevEl: '.relaevPro-next',
+            },
+            //滑到最后一个隐藏前进按钮
+            on: {
+                slideChangeTransitionEnd: function(){
+
+                    if(this.isEnd){
+                        this.navigation.$nextEl.css('display','none');
+                    }else{
+                        this.navigation.$nextEl.css('display','block');  
+                    }
+
+                    if(this.isBeginning){
+                        this.navigation.$prevEl.css('display','none');
+                    }else{
+                        this.navigation.$prevEl.css('display','block');  
+                    }
+                },
             },
         });
-        console.log(Banner1)
+        new Swiper('.Banner2', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: '.latelyLook-prev',
+                prevEl: '.latelyLook-next',
+            },
+            //滑到最后一个隐藏前进按钮
+            on: {  
+                slideChangeTransitionEnd: function(){
+                    if(this.isEnd){
+                        this.navigation.$nextEl.css('display','none');
+                    }else{
+                        this.navigation.$nextEl.css('display','block');  
+                    }
+
+                    if(this.isBeginning){
+                        this.navigation.$prevEl.css('display','none');
+                    }else{
+                        this.navigation.$prevEl.css('display','block');  
+                    }
+                },
+            },
+        });
     }
 }
 </script>
@@ -491,8 +536,9 @@ export default {
                     background: #f0ede8;
                     cursor: pointer;
                 }
-                --swiper-navigation-color: #00ff33;/* 单独设置按钮颜色 */
-                --swiper-navigation-size: 30px;/* 设置按钮大小 */
+            }
+            .relaevPro-next{
+                display: none;
             }
 
             .moreSort{
@@ -515,6 +561,16 @@ export default {
             text-align: center;
             h3{
                 padding: 40px 0 30px;
+            }
+        }
+
+        .latelyLookCont{
+            position: relative;
+            .swiper-slide{
+                background: #f0ede8;
+            }
+            .latelyLook-next{
+                display: none;
             }
         }
 

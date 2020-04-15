@@ -52,7 +52,7 @@
                     </el-col>
                     <el-col style="font-size: 14px;padding-top: 4px;">
                         还没有账号？
-                        <router-link to="/" style="text-decoration: underline">即刻注册</router-link>
+                        <router-link to="/userOper/register/" style="text-decoration: underline">即刻注册</router-link>
                     </el-col>
                 </el-row>
                 

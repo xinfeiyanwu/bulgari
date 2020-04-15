@@ -4,7 +4,6 @@ export default {
         ProductSortObj: {},
       },
       mutations: {
-    
         showProductSortState: (state, payload) => {
           state.ProductSortState = true;
           state.ProductSortObj = payload.ProductSortObj;

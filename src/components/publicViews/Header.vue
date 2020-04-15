@@ -48,10 +48,13 @@
                     </router-link>
                 </el-col>
                 <el-col :span="8">
-                    <router-link to="/">
-                    <el-badge value="12" class="item">
-                        <img src="../../assets/header/shoppingCart.png">
-                    </el-badge>  
+                    <router-link to="/" style="cursor: pointer;">
+                        <el-badge value="12" class="item">
+                            <img 
+                                @mouseenter="showShoppingCartModel"
+                                @mouseleave="StopShoppingCartModel"
+                                src="../../assets/header/shoppingCart.png">
+                        </el-badge>  
                     </router-link>
                 </el-col>
             </el-row>
@@ -81,22 +84,29 @@
                 {{item.name}}
             </span>
          </template>
+         <!-- 产品分类选项框的显示 -->
          <ProductSort v-if="this.$store.state.ProductSort.ProductSortState"/>
      </div>
+     
+    <!-- 购物袋的显示 -->
+    <ShoppingCartModel v-if="this.$store.state.shoppingCart.showShoppingCartState"/>
    </div>
 </template>
 <script>
 import 'vuex'
-import '../../mock/header/productSortNav.js'
+import '@/mock/header/productSortNav.js'
 import LoginModel from "../content/userOper/LoginModel.vue"
 import ProductSort from './ProductSort.vue'
+import ShoppingCartModel from '../content/shop/shoppingCart/ShoppingCartModel.vue'
+import { setTimeout, clearTimeout } from 'timers';
 export default {
     name: 'Header',
-    components: {LoginModel,ProductSort},
+    components: {LoginModel,ProductSort,ShoppingCartModel},
     data(){
         return {
             contentNav: [],
             ShowSearchState: false,
+            Timer: null,    //延迟弹出购物车窗口的定时器
         }
     },
     methods:{
@@ -116,6 +126,14 @@ export default {
         },
         hiddenProductSort(){
             this.$store.dispatch('hiddenProductSort');
+        },
+        showShoppingCartModel(){
+            this.Timer = setTimeout(() => {
+                this.$store.dispatch('showShoppingCartModelReq');
+            }, 500)
+        },
+        StopShoppingCartModel(){
+            clearTimeout(this.Timer);
         }
     },
     created(){
@@ -123,11 +141,10 @@ export default {
             .then((response) => {
                 let data = response.data;
                 this.contentNav = data;
-                //console.log(response);
             })
     },
     mounted(){
-        console.log(this.$store.state)
+        //console.log(this.$store.state)
     }
 }
 </script>
