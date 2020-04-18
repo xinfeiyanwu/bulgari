@@ -14,100 +14,117 @@
     <p>{{SeriesProduct.Description.description}}</p>
 
     <div class="productShop">
-      <div class="productScreen">
+        <div class="productScreen">
         <el-row>
 
-          <el-col :span="14" style="display: flex;align-items: flex-start;">
+            <el-col :span="14" style="display: flex;align-items: flex-start;">
             <span>筛选条件:</span>
             <div class="productScreenBox">
-              <template v-for="(item ,index) in menuDataList">
+                <template v-for="(item ,index) in menuDataList">
                 <Menu 
-                  :menuData="item"
-                  :key="index"/>
-              </template>
+                    :menuData="item"
+                    :key="index"/>
+                </template>
             </div>
-          </el-col>
-          <el-col :span="10" style="text-align: right;cursor: pointer;">
+            </el-col>
+            <el-col :span="10" style="text-align: right;cursor: pointer;">
             <span>更多</span>
             <label for="onlineSale">
-              <input type="radio" id="onlineSale" name="saleType" value="onlineSale" v-model="saleType">
-              线上销售
+                <input type="radio" id="onlineSale" name="saleType" value="onlineSale" v-model="saleType">
+                线上销售
             </label>
             <label for="seeAll">
-              <input type="radio" id="seeAll" name="saleType" value="seeAll" v-model="saleType">
-              查看全部
+                <input type="radio" id="seeAll" name="saleType" value="seeAll" v-model="saleType">
+                查看全部
             </label>
             <span>28 个产品</span>
-          </el-col>
+            </el-col>
 
         </el-row>
             
         <div class="Screened">
             <span>产品系列: </span>
         </div>
-      </div>
+        </div>
 
-      <div class="productDisplay">
-        <template v-for="(item, i) in SeriesProduct.AllProductList">
-          <div class="shopCategory" :key="i">
-            <p>{{item.productType}}</p>
-              
-            <el-row>
-              <template v-for="(productList, j) in item.productList">
-                <el-col 
-                  :span="6" 
-                  :key="j" 
-                  v-show="j < seeMoreLimit[i]"
-                >
-                    <div 
-                        :class="{
-                            'shopCategoryItem':true,
-                            'clearMargin': j+1%4==0&&j!=0
-                        }" 
-                    >   
-                        <img 
-                            class="cover" 
-                            :src="productList.ImgUrl" :alt="productList.type">
-                        <div 
-                            class="shopingInfo"
-                            ref="shopingInfo"
-                            @mouseenter="ShoppingInfoShow($event)" 
-                            @mouseleave="ShoppingShow($event)"
-                        >
-                            <img class="inventory" src="../../../assets/header/inventory.png" alt="收藏">
-                            <div 
-                                class="shoppingInfo">
-                                <div class="jump" @click="jumpShopping(productList.productSeriesName)">
-                                    <p>{{productList.productType}}</p>
-                                    <h5>{{productList.productSeriesName}}</h5>
+        <div class="productDisplay"
+            v-loading="Proloading"
+            element-loading-text="拼命加载中"
+            element-loading-spinner="el-icon-loading">
+            <template v-for="(item, i) in SeriesProduct.AllProductList">
+                <div class="shopCategory" :key="i">
+                    <p>{{item.productType}}</p>
+                    
+                    <el-row>
+                        <template v-for="(productList, j) in item.productList">
+                            <el-col 
+                            :span="6" 
+                            :key="j" 
+                            v-show="j < seeMoreLimit[i]"
+                            >
+                                <div 
+                                    :class="{
+                                        'shopCategoryItem':true,
+                                        'clearMargin': j+1%4==0&&j!=0
+                                    }" 
+                                >   
+                                    <img 
+                                        class="cover" 
+                                        :src="productList.ImgUrl" :alt="productList.type">
+                                    <div 
+                                        class="shopingInfo"
+                                        ref="shopingInfo"
+                                        @mouseenter="ShoppingInfoShow($event)" 
+                                        @mouseleave="ShoppingShow($event)"
+                                    >
+                                        <img 
+                                            @click="inventory"
+                                            class="inventory" src="../../../assets/header/inventory.png" alt="收藏">
+                                        <div 
+                                            class="shoppingInfo">
+                                            <div class="jump" @click="jumpShopping(productList.productSeriesName,productList.productNO)">
+                                                <p>{{productList.productType}}</p>
+                                                <h5>{{productList.productSeriesName}}</h5>
+                                            </div>
+                                            <strong>&#165; {{productList.cost}}</strong>
+                                        </div>
+
+                                        <div class="search" @click="jumpShopping(productList.productSeriesName,productList.productNO)">探索</div>
+                                    </div>
                                 </div>
-                                <strong>&#165; {{productList.cost}}</strong>
-                            </div>
+                            </el-col>
 
-                            <div class="search" @click="jumpShopping(productList.productSeriesName)">探索</div>
-                        </div>
-                    </div>
-                </el-col>
+                            <el-col 
+                                class="searchMore" 
+                                :key="j+'_1'" 
+                                v-if="j+1===seeMoreLimit[i] && seeMoreLimit[i] <= 8">
+                                <button 
+                                    @click="seeMoreProduct(item.productList.length, i)"
+                                    class="searchMoreBtn">查看更多({{item.productList.length-8}})
+                                </button>
+                            </el-col>
 
-                <el-col 
-                  class="searchMore" 
-                  :key="j+'_1'" 
-                  v-if="j+1===seeMoreLimit[i] && seeMoreLimit[i] <= 8">
-                  <button 
-                      @click="seeMoreProduct(item.productList.length, i)"
-                      class="searchMoreBtn">查看更多({{item.productList.length-8}})
-                  </button>
-                </el-col>
+                        </template>
+                    </el-row>
+                </div>
 
-              </template>
+            </template>
+        </div>
+        
 
-            </el-row>
-          </div>
-        </template>
-      </div>
+        <!-- 弹窗 -->
+        <el-dialog
+            title="注意"
+            :visible.sync="dialogVisible"
+            width="30%">
+            <span>请先登录！</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">否</el-button>
+                <el-button type="primary" @click="jumpLogin">登录</el-button>
+            </span>
+        </el-dialog>
     </div>
-
-  </div>
+</div>
 </template>
 
 <script>
@@ -115,6 +132,7 @@ import Menu from'./Menu'
 import Vue from 'vue'
 import '@/mock/shop/SeriesProduct.js'
 import '@/mock/shop/menuDataList.js'
+import { setTimeout } from 'timers';
 export default {
     name: "ShoppingSelect",
     components: {Menu},
@@ -128,7 +146,9 @@ export default {
                   description: '',
               },
             },
-            seeMoreLimit: [],    //设置查看更多商品的限制
+            dialogVisible: false,
+            seeMoreLimit: [],    //设置查看更多商品的限制,
+            Proloading: true
         }
     },
      methods: {
@@ -142,7 +162,7 @@ export default {
           Vue.set(this.seeMoreLimit, i, limit)
           //console.log(i, limit)
         },
-        jumpShopping(productSeriesName){
+        jumpShopping(productSeriesName,productNO){
             this.$router.push({
                 path:'/Shopping',
                 query: {
@@ -150,35 +170,53 @@ export default {
                         ProductSortType: this.$route.query.ProductSortType,
                         ProductType: this.$route.query.ProductType,
                         productSeriesName,
+                        productNO
                     }
             })
+        },
+        inventory(){
+            const token = localStorage.getItem('Authorization');
+            if(token===null||token===''){
+                this.dialogVisible = true;
+            }
+            else{
+                this.$message({
+                    message: '收藏成功!',
+                    type: 'success',
+                    offset: 200,
+                })
+            }
+        },
+        jumpLogin(){
+            this.$router.push('/userOper/login');
         }
     },
     created(){
-        this.$Axios.get('/ShoppingSelect/menuDataList')
+        setTimeout(()=>{
+            this.$Axios.get('/ShoppingSelect/menuDataList')
             .then((responese) => {
                 this.menuDataList = responese.data;
             })
             
-        this.$Axios.get('/ShoppingSelect/SeriesProduct')
-          .then((responese) => {
-            let data = responese.data;
-            
-            data.AllProductList.forEach((v,i) => {
-              //debugger
-              v.productList.forEach((vv,j) => {
-                  data.AllProductList[i].productList[j].ImgUrl = require(`../../../assets/shop/accessory/Serpenti/productDisplay/${vv.ImgUrl}.png`);
-              })
-            });
+            this.$Axios.get('/ShoppingSelect/SeriesProduct')
+            .then((responese) => {
+                let data = responese.data;
+                
+                data.AllProductList.forEach((v,i) => {
+                    v.productList.forEach((vv,j) => {
+                        data.AllProductList[i].productList[j].ImgUrl = require(`../../../assets/shop/accessory/Serpenti/productDisplay/${vv.ImgUrl}.png`);
+                    })
+                });
 
-            //设置限制限制商品的个数
-            for(let i=0;i<data.AllProductList.length;i++){
-              this.seeMoreLimit[i] = 8;
-            }
+                //设置限制限制商品的个数
+                for(let i=0;i<data.AllProductList.length;i++){
+                    this.seeMoreLimit[i] = 8;
+                }
 
-            this.SeriesProduct = {...this.SeriesProduct, ...data};
-            console.log(this.SeriesProduct)
-          })
+                this.SeriesProduct = {...this.SeriesProduct, ...data};
+                this.Proloading = false;
+            })
+        },2000)
     },
     mounted(){
         this.$store.dispatch('hiddenProductSort', false);
@@ -241,6 +279,7 @@ export default {
 
     .productDisplay{
         margin: 50px 80px;
+        min-height: 100px;
         .shopCategory{
             p{
                 padding-bottom: 30px;
@@ -338,6 +377,14 @@ export default {
                     cursor: pointer;    
                 }
             }
+        }
+    }
+
+    // 从dialog开始击穿deep才可以修改dialog
+    /deep/ .el-dialog  {
+        text-align: center;
+        .el-dialog__footer{
+            text-align: center;
         }
     }
 }

@@ -15,14 +15,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '12,662',                 
                     saleType: 'onlineSale',
-                    character: [
-                        {
-                            type: '产品系列',
-                            menuList: [
-                                'Daniel Roth(11)',
-                            ]
-                        },
-                    ]
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch4',
@@ -30,6 +23,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '34,662',                 
                     saleType: 'onlineSale',
+                    productNO: '289102',
                 },
                 {
                     ImgUrl: 'watch3',
@@ -37,6 +31,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '34,333',                 
                     saleType: 'All',
+                    productNO: '289102',
                 },
                 {
                     ImgUrl: 'watch2',
@@ -44,6 +39,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '34,111',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch',
@@ -51,6 +47,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '22,111',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch2',
@@ -58,6 +55,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '12,153',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch4',
@@ -65,6 +63,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '26,153',                 
                     saleType: 'All',
+                    productNO: '289102',
                 },
                 {
                     ImgUrl: 'watch3',
@@ -72,6 +71,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '65,153',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch1',
@@ -79,6 +79,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '48,153',                 
                     saleType: 'All',
+                    productNO: '289102',
                 },
                 {
                     ImgUrl: 'watch2',
@@ -86,6 +87,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '48,134',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 }
             ]
         },
@@ -98,6 +100,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '42,134',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch1',
@@ -105,6 +108,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '65,134',                 
                     saleType: 'All',
+                    productNO: '289102',
                 },
                 {
                     ImgUrl: 'watch3',
@@ -112,6 +116,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '65,434',                 
                     saleType: 'All',
+                    productNO: '289102',
                 },
                 {
                     ImgUrl: 'watch1',
@@ -119,6 +124,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '24,434',                 
                     saleType: 'All',
+                    productNO: '289102',
                 },
                 {
                     ImgUrl: 'watch1',
@@ -126,6 +132,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '38,434',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch',
@@ -133,6 +140,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '31,434',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch1',
@@ -140,6 +148,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '16,543',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch',
@@ -147,6 +156,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '43,645',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch1',
@@ -154,6 +164,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '43,233',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch2',
@@ -161,6 +172,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '22,611',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch2',
@@ -168,6 +180,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '47,645',                 
                     saleType: 'All',
+                    productNO: '289102',
                 },
                 {
                     ImgUrl: 'watch4',
@@ -175,6 +188,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '54,612',                 
                     saleType: 'All',
+                    productNO: '289102',
                 },
                 {
                     ImgUrl: 'watch3',
@@ -182,6 +196,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '43,654',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch4',
@@ -189,6 +204,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '43,233',                 
                     saleType: 'All',
+                    productNO: '289102',
                 }
             ]
         },
@@ -201,6 +217,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '32,222',                 
                     saleType: 'All',
+                    productNO: '289102',
                 },
                 {
                     ImgUrl: 'watch4',
@@ -208,6 +225,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '52,222',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch',
@@ -215,6 +233,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '42,216',                 
                     saleType: 'All',
+                    productNO: '289102',
                 },
                 {
                     ImgUrl: 'watch2',
@@ -222,6 +241,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '52,222',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
             ]
         },
@@ -234,6 +254,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '22,000',
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch4',
@@ -241,6 +262,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '21,000',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch2',
@@ -248,6 +270,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '31,000',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
                 {
                     ImgUrl: 'watch3',
@@ -255,6 +278,7 @@ const SeriesProduct = {
                     productSeriesName: 'Serpenti Seduttori鎏光蛇影',
                     cost: '32,000',                 
                     saleType: 'onlineSale',
+                    productNO: '289101',
                 },
             ]
         }

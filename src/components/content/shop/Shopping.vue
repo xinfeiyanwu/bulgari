@@ -10,21 +10,21 @@
             </el-breadcrumb>
 
             <el-row>
-                <el-col :span="10" :offset="3">
-                    <img src="" alt="" class="display">111
+                <el-col :span="11" :offset="1" class="display">
+                    <img :src="dataSource.productData.img" alt="">
                 </el-col>
-                <el-col :span="11">
+                <el-col :span="11" :offset="1">
                     <div class="shoppingInfo">
-                        <div class="ProductType">钱包</div>
-                        <div class="productSeriesName">BVLGARI BVLGARI男士系列</div>
-                        <div class="NO"><span>编号</span><strong>289101</strong></div>
-                        <p class="proIntroduction">“BVLGARI BVLGARI”炭黑钻石色和鲜绿色粒面小牛皮男士拉链钱夹，炭黑钻石色小羊皮内衬。经典标识配饰，采用镀钯黄铜材质。</p>
-                        <div class="Coin">&#165; 5,100</div> 
+                        <div class="ProductType">{{dataSource.productData.ProductType}}</div>
+                        <div class="productSeriesName">{{dataSource.productData.productSeriesName}}</div>
+                        <div class="NO"><span>编号</span><strong>{{dataSource.productData.productNO}}</strong></div>
+                        <p class="proIntroduction">{{dataSource.productData.proIntroduction}}</p>
+                        <div class="Coin">&#165; {{dataSource.productData.Coin}}</div> 
                         <div class="numSelect">
-                            <select name="" id="" style="    height: 33px;">
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
+                            <select  style="width: 100px;height: 33px;" v-model="productNum">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
                             </select>
                         </div>
                         <div class="giftBox">
@@ -39,7 +39,9 @@
                                 <span class="modify" @click="modifyHandle">修改</span>
                             </div>
                         </div>
-                        <div class="addShoppingCar">添加到购物袋</div>
+                        <div 
+                            @click="addShopCart(dataSource.productData)"
+                            class="addShoppingCart">添加到购物袋</div>
                         <div class="bookanappointment"  @click="selectServe=true">精品店服务</div>
                         <div class="findStore">
                             <a href="" title="寻找附近店铺">寻找附近店铺</a>
@@ -58,13 +60,11 @@
         <div class="shoppingContent">
             <el-tabs v-model="tabs1">
                 <el-tab-pane label="描述" name="detail">
-                    <h3>钱包</h3>
-                    <p>
-						此款手持钱夹以乳蛋白石色金属质感水蛇皮和乳蛋白石色小牛皮制成，饰有镌刻“BVLGARI BVLGARI”标识的浅金镀金黄铜环扣。九个信用卡卡位，两个纸币隔层，一个拉链零钱包。19 x 9 cm. - 7.5 x 3.5"
-                    </p>
+                    <h3>{{dataSource.productData.detail.title}}</h3>
+                    <p>{{dataSource.productData.detail.detailWord}}</p>
                 </el-tab-pane>
                 <el-tab-pane label="宝格丽配饰" name="Acc">
-                    <p>Bulgari宝格丽皮具及配饰均在意大利制造    </p>
+                    <p>{{dataSource.productData.Acc}}</p>
                 </el-tab-pane>
             </el-tabs>
         </div>
@@ -76,18 +76,18 @@
                         <div class="swiper-wrapper">
                             <div 
                                 class="swiper-slide"
-                                v-for="(item,index) in 6"  
+                                v-for="(item,index) in dataSource.relevCont.relevContList"  
                                 :key="index">
-                                <img src="@/assets/shop/relevShop/289101_002.png" alt="">
+                                <img :src="item.img" alt="">
                                 <div class="itemDetail" @mouseleave="leaveDetail($event)" @mouseenter="lookDetail($event)">
                                     <div>
                                         <h4 class="itemName">
                                             <router-link to="/">
-                                                BVLGARI BVLGARI系列<br>
-                                                名片夹
+                                                {{item.productSeriesName}}<br>
+                                                {{item.ProductType}}
                                             </router-link>
                                         </h4>
-                                        <p><span>编号</span> <strong>287612</strong></p>
+                                        <p><span>编号</span> <strong>{{item.relevNO}}</strong></p>
                                     </div>
                                 </div>
                             </div>
@@ -97,18 +97,21 @@
                     <div class="swiper-button-next relaevPro-next" style="outline: none;right: 72px;"></div>
                 </el-tab-pane>
                 <el-tab-pane label="更多种类" name="moreSort">
-                    <div class="moreSort">
-                        <div class="moreSortItem" v-for="item in 3" :key="item">
-                            <img src="@/assets/shop/relevShop/289101_002.png" alt="">
+                    <div 
+                        class="moreSort">
+                        <div class="moreSortItem" 
+                            v-for="(item,index) in dataSource.relevCont.moreSortList" 
+                            :key="index">
+                            <img :src="item.img" alt="">
                             <div class="itemDetail" @mouseleave="leaveDetail($event)" @mouseenter="lookDetail($event)">
                                 <div>
                                     <h4 class="itemName">
                                         <router-link to="/">
-                                            BVLGARI BVLGARI系列<br>
-                                            名片夹
+                                            {{item.productSeriesName}}<br>
+                                            {{item.ProductType}}
                                         </router-link>
                                     </h4>
-                                    <p><span>编号</span> <strong>287612</strong></p>
+                                    <p><span>编号</span> <strong>{{item.moreNO}}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -127,18 +130,18 @@
                     <div class="swiper-wrapper">
                         <div 
                             class="swiper-slide"
-                            v-for="(item,index) in 6"  
+                            v-for="(item,index) in dataSource.latelyLookList"  
                             :key="index">
-                            <img src="@/assets/shop/relevShop/289101_002.png" alt="">
+                            <img :src="item.img" alt="">
                             <div class="itemDetail" @mouseleave="leaveDetail($event)" @mouseenter="lookDetail($event)">
                                 <div>
                                     <h4 class="itemName">
                                         <router-link to="/">
-                                            BVLGARI BVLGARI系列<br>
-                                            名片夹
+                                            {{item.productSeriesName}}<br>
+                                            {{item.ProductType}}
                                         </router-link>
                                     </h4>
-                                    <p><span>编号</span> <strong>287612</strong></p>
+                                    <p><span>编号</span> <strong>{{item.latelyNO}}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -161,7 +164,6 @@
                 </div>
             </div>
         </div>
-
 
         <!-- //弹窗 -->
         <el-dialog
@@ -223,9 +225,11 @@
 </template>
 
 <script>
+import 'vuex'
 import Swiper from "swiper"
 import "../../../../node_modules/swiper/css/swiper.css"
 import "../../../../node_modules/swiper/js/swiper.min.js"
+import '@/mock/shop/shopping.js'
 export default {
     name: 'Shopping',
     data(){
@@ -236,8 +240,50 @@ export default {
             giftDisplaySrc: "", //选择礼盒后图片展示
             GiftBoxType: 'giftBoxTpye1', //记录下礼盒的类型
             GiftBoxHidden: true,
-            tabs1: 'detail',
-            tabs2: 'relaevPro'
+            tabs1: 'detail',    
+            tabs2: 'relaevPro',
+            // 页面dataSource
+            dataSource: {
+                productData: {
+                    ProductType: '',
+                    productSeriesName: '',
+                    productNO: 289101,
+                    proIntroduction: '',
+                    Coin: '',
+                    detail: {
+                        title: '',
+                        detailWord: ''
+                    },
+                    Acc: ''
+                },
+                relevCont: {
+                    relevContList: [
+                        {
+                            img: '',
+                            ProductType: '',
+                            productSeriesName: '',
+                            relevNO: 0,
+                        },
+                    ],
+                    moreSortList: [
+                        {
+                            img: '',
+                            ProductType: '',
+                            productSeriesName: '',
+                            moreNO: 0,
+                        },
+                    ]
+                },
+                latelyLookList: [
+                    {
+                        img: '',
+                        ProductType: '',
+                        productSeriesName: '',
+                        latelyNO: 0,
+                    },
+                ]
+            },
+            productNum: 1, //产品数量
         }
     },
     methods: {
@@ -265,61 +311,115 @@ export default {
         leaveDetail(ev){
            ev.target.className = 'itemDetail';
         },
+        addShopCart(payload){
+            //判断购物车是否已经存在之前的产品，存在则累加
+            const shoppingCartList = this.$store.state.shoppingCart.shoppingCartList;
+            for(let i in shoppingCartList){
+                if(payload.productNO==shoppingCartList[i].productNO) {       
+                    if(shoppingCartList[i].productNum >= 3){
+                        this.$message({
+                            type: 'warning',
+                            message: '您存放购物车的商品已超出限购总数！',
+                            offset: 200
+                        })
+                        return ;
+                    }
+                    else{  
+                        this.$store.dispatch('accuProNumReq', {
+                            productNum: this.productNum,
+                            productNO: shoppingCartList[i].productNO
+                        });
+                        return ;
+                    }
+                }
+            }
+            //正常添加产品到购物车
+            this.$store.dispatch('addShoppingCartReq', this.transformOrderData(payload));
+        },
+        //处理产品数据
+        transformOrderData(payload){
+            //处理数据结果,深度复制
+            let orderData = JSON.parse(JSON.stringify(payload));   
+            delete orderData.detail;
+            delete orderData.proIntroduction;
+            delete orderData.Acc;
+            orderData['productNum'] = Number(this.productNum);  
+            orderData['isSel'] = true;     //在购物车里默认不选中
+            console.log(orderData);
+            return orderData;
+        }
     },
-    beforeCreate(){
+    created(){
+        this.$Axios.get(`/shopping?productNO=${this.$route.query.productNO}`)
+            .then(res => {
+                this.dataSource = res.data;
+                //console.log(this.dataSource);
+            })
+            .then(()=>{
+                new Swiper('.Banner1', {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                    navigation: {
+                        nextEl: '.relaevPro-prev',
+                        prevEl: '.relaevPro-next',
+                    },
+                    //滑到最后一个隐藏前进按钮
+                    on: {
+                        slideChangeTransitionEnd: function(){
 
+                            if(this.isEnd){
+                                this.navigation.$nextEl.css('display','none');
+                            }else{
+                                this.navigation.$nextEl.css('display','block');  
+                            }
+
+                            if(this.isBeginning){
+                                this.navigation.$prevEl.css('display','none');
+                            }else{
+                                this.navigation.$prevEl.css('display','block');  
+                            }
+                        },
+                    },
+                });
+                new Swiper('.Banner2', {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                    navigation: {
+                        nextEl: '.latelyLook-prev',
+                        prevEl: '.latelyLook-next',
+                    },
+                    //滑到最后一个隐藏前进按钮
+                    on: {  
+                        slideChangeTransitionEnd: function(){
+                            if(this.isEnd){
+                                this.navigation.$nextEl.css('display','none');
+                            }else{
+                                this.navigation.$nextEl.css('display','block');  
+                            }
+
+                            if(this.isBeginning){
+                                this.navigation.$prevEl.css('display','none');
+                            }else{
+                                this.navigation.$prevEl.css('display','block');  
+                            }
+                        },
+                    },
+                });
+            })
     },
-    mounted(){
-        new Swiper('.Banner1', {
-            slidesPerView: 3,
-            spaceBetween: 30,
-            navigation: {
-                nextEl: '.relaevPro-prev',
-                prevEl: '.relaevPro-next',
-            },
-            //滑到最后一个隐藏前进按钮
-            on: {
-                slideChangeTransitionEnd: function(){
-
-                    if(this.isEnd){
-                        this.navigation.$nextEl.css('display','none');
-                    }else{
-                        this.navigation.$nextEl.css('display','block');  
-                    }
-
-                    if(this.isBeginning){
-                        this.navigation.$prevEl.css('display','none');
-                    }else{
-                        this.navigation.$prevEl.css('display','block');  
-                    }
-                },
-            },
-        });
-        new Swiper('.Banner2', {
-            slidesPerView: 3,
-            spaceBetween: 30,
-            navigation: {
-                nextEl: '.latelyLook-prev',
-                prevEl: '.latelyLook-next',
-            },
-            //滑到最后一个隐藏前进按钮
-            on: {  
-                slideChangeTransitionEnd: function(){
-                    if(this.isEnd){
-                        this.navigation.$nextEl.css('display','none');
-                    }else{
-                        this.navigation.$nextEl.css('display','block');  
-                    }
-
-                    if(this.isBeginning){
-                        this.navigation.$prevEl.css('display','none');
-                    }else{
-                        this.navigation.$prevEl.css('display','block');  
-                    }
-                },
-            },
-        });
-    }
+    // beforeRouteEnter(to, from, next){
+    //     if(to.path=='/userOper/Login/'){
+    //         next();
+    //     }
+    //     else{
+    //         let token = localStorage.getItem('Authorization');
+    //         if(token===null||token===''){
+    //             next('/userOper/Login/');
+    //         }else{
+    //             next();
+    //         }
+    //     }
+    // }
 }
 </script>
 
@@ -371,6 +471,10 @@ export default {
         background: #f0ede8;
         padding: 30px 0 60px 30px;
 
+        .display img{
+            padding-top: 23%;
+        }
+        
         .shoppingInfo{
             width: 440px;
             text-align: center;
@@ -433,7 +537,7 @@ export default {
                     }
                 }
             }
-            .addShoppingCar{
+            .addShoppingCart{
                 margin-top: 20px;
                 max-width: 440px;
                 padding: 10px;    

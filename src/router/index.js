@@ -25,7 +25,6 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
     component: Home,
     children: [
       {
@@ -76,7 +75,7 @@ const routes = [
           {
             path: '/userOper/Login/',
             name: Login,
-            component: Login
+            component: Login,
           }
         ]
       },
@@ -103,7 +102,7 @@ const routes = [
             children: [
               {
                 path: '/headerPlugIn/Serve/',
-                name: ServeContian,
+                name: 'ServeContian',
                 component: ServeContian,
               },
               {
@@ -118,7 +117,7 @@ const routes = [
                   },
                   {
                     path: '/headerPlugIn/Serve/ServeDetail/ServeWatch/:type',
-                    name: 'ServeAccess',
+                    name: 'ServeWatch',
                     component: ServeWatch,
                   },
                   {
@@ -148,7 +147,20 @@ const router = new VueRouter({
     else{
       return {x: 0,y: 0};
     }
-  }
+  },
 })
+// router.beforeEach((to,from,next)=>{
+//   if(to.path=='/userOper/Login/'){
+//     next();
+//   }
+//   else{
+//     let token = localStorage.getItem('Authorization');
+//     if(token===null||token===''){
+//       next('/userOper/Login/');
+//     }else{
+//       next();
+//     }
+//   }
+// })
 
 export default router

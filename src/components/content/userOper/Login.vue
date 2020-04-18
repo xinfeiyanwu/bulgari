@@ -95,18 +95,39 @@ export default {
                 this.pswNoticeText='请输入您的密码';
                 return ;
             }
-            let encryptedData = this.encryptedData(this.pubkey, {
+            if(this.$store.state.token.token){
+                this.$message({
+                    type: 'warning',
+                    msg: '您登陆！请不要重复登录！',
+                    offset: 200
+                })
+            }
+
+            const encryptedData = this.encryptedData(this.pubkey, {
                 'Number': this.number,
                 'psw': this.psw
             }); 
 
             this.$Axios.post('/login', encryptedData)
                 .then(res => {
+                    const {code, msg, token, num} = res.data;
                     console.log(res);
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+                    if(code==200){
+                        this.$message({
+                            type: "success",
+                            message: msg,
+                            offset: 200
+                        })
+                        setTimeout(() => {
+                            this.$store.dispatch('setTokenAction', {token,num});
+                            this.$store.state.loginModel.loginModelState = false;
+                            if(this.$route.fullPath != '/') this.$router.replace('/')
+                        },1000);
+                    }
+                    else{
+                        this.$message.error(msg);
+                    }
+                });
         },
         hiddenNotice(){
             this.numberNoticeText='';

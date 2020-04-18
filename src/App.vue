@@ -28,6 +28,9 @@ img{
   width: 100%;
 }
 video{width: 100%}
+input,label{
+  cursor: pointer;
+}
 
 
 #app {

@@ -64,8 +64,10 @@
 
 <script>
 import 'vuex';
+import '@/mock/userOperation/login.js'
+import { JSEncrypt } from 'jsencrypt'
 export default {
-    name: 'LoginModel',
+    name: 'login',
     data(){
         return {
             number: '',
@@ -73,6 +75,14 @@ export default {
             rememberValue: '',
             numberNoticeText: '',
             pswNoticeText: '',
+            pubkey: `
+                    -----BEGIN PUBLIC KEY-----
+                    MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQD3B3cnlK336lHQje53+mIh/fHz
+                    GFBAtH6alqDXa4LmuTMuwBQqBBIg+HIIb9001wmcMFQwueIG//vV112USWeZBOv1
+                    gK86uDPNdsT1dKKQiVTK04IXxrlla21Wg3A23/3/unFoyaU73RhLuR0yBqcL61Ot
+                    GPCyw3bTD+39Bm5BUQIDAQAB
+                    -----END PUBLIC KEY-----
+                    `
         }
     },
     methods: {
@@ -82,23 +92,67 @@ export default {
             }
             if(this.psw == '') {
                 this.pswNoticeText='请输入您的密码';
+                return ;
             }
+            if(this.$store.state.token.token){
+                this.$message({
+                    type: 'warning',
+                    message: '您已登陆！请不要重复登录！',
+                    offset: 200
+                })
+                return ;
+            }
+
+            const encryptedData = this.encryptedData(this.pubkey, {
+                'Number': this.number,
+                'psw': this.psw
+            }); 
+
+            this.$Axios.post('/login', encryptedData)
+                .then(res => {
+                    const {code, msg, token, num} = res.data;
+                    console.log(res);
+                    if(code==200){
+                        this.$message({
+                            type: "success",
+                            message: msg,
+                            offset: 200
+                        })
+                        setTimeout(() => {
+                            this.$store.dispatch('setTokenAction', {token,num});
+                            this.$store.state.loginModel.loginModelState = false;
+                            if(this.$route.fullPath != '/') this.$router.replace('/')
+                        },1000);
+                    }
+                    else{
+                        this.$message.error(msg);
+                    }
+                });
         },
         hiddenNotice(){
             this.numberNoticeText='';
             this.pswNoticeText='';
         },
         setCookie(num, psw, exdays){
-            
-            let str = num + '=' + psw + this.setTime(exdays);
-            console.log(str)
-            document.cookie = str;
-        },
-        setTime(exdays){
             let date = new Date();
             date.setTime(date.getTime()+(exdays*24*60*60*1000));
             let expires = ';expires=' + date.toGMTString();
-            return expires;
+            let str = num + '=' + psw + expires;
+            //console.log(str)
+            document.cookie = str;
+        },
+        //加密
+        encryptedData(publicKey, data) {
+            // 新建JSEncrypt对象
+            let encryptor = new JSEncrypt();
+            // 设置公钥
+            encryptor.setPublicKey(publicKey);
+            // 加密数据
+            for(let key in data){
+                data[key] = encryptor.encrypt(data[key]);
+            }
+           // console.log(data);
+            return data;
         }
     },
     watch: {

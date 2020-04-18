@@ -50,7 +50,7 @@ export default {
         },
         jumpShoppingSelect(ProductSortType, ProductType){
             this.$router.push({
-                path: 'ShoppingSelect',
+                path: '/ShoppingSelect',
                 query: {
                     ProductSortNavName: this.ProductSortNavName,
                     ProductSortType,

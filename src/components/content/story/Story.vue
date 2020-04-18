@@ -12,7 +12,9 @@
             </router-link>
         </div>
 
-        <div class="storyCover" v-if="this.$route.params.type=='story'">
+        <div 
+            class="storyCover" 
+            v-if="this.$route.params.type=='story'">
             <video 
             src="../../../assets/homePage/story/lib-cinemagia-videocut.mp4"
             muted
@@ -27,7 +29,12 @@
 
         <!-- 每个col的内容撑起的高度都不一样，导致el-col高度不同，导致瀑布流 -->
         <!-- 解决的方法是限定col的最小高度,使用flex让img和vedio等比例缩放 -->
-        <div class="storyDetail">
+        <div 
+            class="storyDetail"
+            v-loading="loading"
+            element-loading-text="拼命加载中"
+            element-loading-spinner="el-icon-loading"
+            element-loading-background="#fff">
             <el-row>
                 <template v-for="(item, index) in dataList">
                     <el-col  
@@ -71,6 +78,7 @@
 import '@/mock/story/story.js'
 import '@/mock/story/activity.js'
 import '@/mock/story/lifeType.js'
+import { setTimeout } from 'timers';
 export default {
     name: 'Story',
     data(){
@@ -90,7 +98,8 @@ export default {
                     type: 'lifeType',
                     name: '生活方式',
                 }
-            ]
+            ],
+            loading: true,
         }
     },
     methods: {
@@ -98,13 +107,16 @@ export default {
             return this.$route.params.type==type?true:false;
         },
         getDataList(type){
-            this.$Axios.get(`/story`,{
-                params: {type}
-            }).then((res) => {
-                let data = res.data;
-                this.dataList = data;
-                //console.log(this.storyList)
-            })
+            this.loading = true;
+            setTimeout(()=>{
+                this.$Axios.get(`/story`,{
+                    params: {type}
+                }).then((res) => {
+                    let data = res.data;
+                    this.dataList = data;
+                    this.loading = false;
+                });
+            }, 2000)
         }
     },
     created(){
@@ -172,6 +184,7 @@ export default {
 
     .storyDetail{
         margin: 20px 20px 0 40px;
+        min-height: 100px;
         .el-col{
             padding-right: 20px;
             min-height: 500px;

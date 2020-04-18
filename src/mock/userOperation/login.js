@@ -22,8 +22,8 @@ iwy3odfkIv2spUnduuatXEo23xO5HWTyGUYxjdW2NwsnKC+IzQjse0vDqF0Uw/B2
 
 const NumberList = [
     {
-        num: '17763838186',
-        psw: 'lixinxin'
+        num: '11111111111',
+        psw: 'admin'
     },
     {
         num: '12345678912',
@@ -42,23 +42,22 @@ const NumberList = [
         psw: 'tretds423ds'
     }
 ]
-const loginResult = {
-        loginSuccess: {    
-            code: 200,
-            msg: '登录成功',
-        },
-        loginError: {
-            pswError: {
-                code: 110,
-                msg: '密码错误',
-            },
-            NumberError: {
-                code: 111,
-                msg: '账号不存在',
-            },
-
-        }
-    }
+const loginResult = [
+    {    
+        code: 200,
+        msg: '登录成功',
+        num: 11111111111,
+        token: '1231daw23423sfadsad',
+    },
+    {
+        code: 110,
+        msg: '密码错误',
+    },
+    {
+        code: 111,
+        msg: '账号不存在',
+    },
+]
 
 export default Mock.mock('/login', 'post', (options)=>{
     let decrypt = new JSEncrypt();
@@ -76,16 +75,16 @@ export default Mock.mock('/login', 'post', (options)=>{
     for(let i=0;i<NumberList.length;i++){
         if(NumberList[i].num == data.Number) {
             if(NumberList[i].psw == data.psw) {
-                console.log(111111);
-                return loginResult.loginSuccess
+                console.log('Success');
+                return loginResult[0]
             }
             else{
-                console.log(222222);
-                return loginResult.loginError.pswError
+                console.log('pswError');
+                return loginResult[1]
             }
         }
     }
-    console.log(33333)
+    console.log('NumberError')
 
-    return loginResult.loginError.NumberError;
+    return loginResult[2]
 })

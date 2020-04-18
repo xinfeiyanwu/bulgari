@@ -1,5 +1,7 @@
 <template>
-    <div id="header" @mouseleave="hiddenProductSort">
+    <div 
+        id="header" 
+        @mouseleave="hiddenProductSort">
 
      <el-row id="headerNav">
         <el-col 
@@ -49,7 +51,10 @@
                 </el-col>
                 <el-col :span="8">
                     <router-link to="/" style="cursor: pointer;">
-                        <el-badge value="12" class="item">
+                        <el-badge 
+                            :hidden="this.$store.state.shoppingCart.shoppingCartList.length===0?true:false"
+                            :value="this.$store.state.shoppingCart.shoppingCartList.length" 
+                            class="item">
                             <img 
                                 @mouseenter="showShoppingCartModel"
                                 @mouseleave="StopShoppingCartModel"
