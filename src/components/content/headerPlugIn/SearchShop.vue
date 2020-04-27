@@ -54,7 +54,7 @@ export default {
 <style lang="less" scoped>
 @height: 40px;
 .SearchShop{
-    margin-top: 149px;
+    margin-top: 183px;
 
     h1{
         padding: 12px 0 58px;

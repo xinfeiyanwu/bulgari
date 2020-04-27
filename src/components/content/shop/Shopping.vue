@@ -349,14 +349,14 @@ export default {
             return orderData;
         }
     },
-    created(){
+    mounted(){
         this.$Axios.get(`/shopping?productNO=${this.$route.query.productNO}`)
             .then(res => {
                 this.dataSource = res.data;
                 //console.log(this.dataSource);
             })
             .then(()=>{
-                new Swiper('.Banner1', {
+                const Banner1 = new Swiper('.Banner1', {
                     slidesPerView: 3,
                     spaceBetween: 30,
                     navigation: {
@@ -381,7 +381,7 @@ export default {
                         },
                     },
                 });
-                new Swiper('.Banner2', {
+                const Banner2 = new Swiper('.Banner2', {
                     slidesPerView: 3,
                     spaceBetween: 30,
                     navigation: {
