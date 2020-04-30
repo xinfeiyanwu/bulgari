@@ -193,27 +193,26 @@ export default {
     },
     created(){
         setTimeout(()=>{
-            this.$Axios.get('/ShoppingSelect/menuDataList')
+            this.$request({url: '/ShoppingSelect/menuDataList'})
             .then((responese) => {
-                this.menuDataList = responese.data;
+                this.menuDataList = responese;
             })
             
-            this.$Axios.get('/ShoppingSelect/SeriesProduct')
+            this.$request({url: '/ShoppingSelect/SeriesProduct'})
             .then((responese) => {
-                let data = responese.data;
                 
-                data.AllProductList.forEach((v,i) => {
+                responese.AllProductList.forEach((v,i) => {
                     v.productList.forEach((vv,j) => {
-                        data.AllProductList[i].productList[j].ImgUrl = require(`../../../assets/shop/accessory/Serpenti/productDisplay/${vv.ImgUrl}.png`);
+                        responese.AllProductList[i].productList[j].ImgUrl = require(`../../../assets/shop/accessory/Serpenti/productDisplay/${vv.ImgUrl}.png`);
                     })
                 });
 
                 //设置限制限制商品的个数
-                for(let i=0;i<data.AllProductList.length;i++){
+                for(let i=0;i<responese.AllProductList.length;i++){
                     this.seeMoreLimit[i] = 8;
                 }
 
-                this.SeriesProduct = {...this.SeriesProduct, ...data};
+                this.SeriesProduct = {...this.SeriesProduct, ...responese};
                 this.Proloading = false;
             })
         },2000)
@@ -231,7 +230,7 @@ export default {
 
 <style lang="less" scoped>
 .ShoppingSelect {
-    margin-top: 176px;
+    margin-top: 180px;
 
     .shopDescription {
         position: relative;

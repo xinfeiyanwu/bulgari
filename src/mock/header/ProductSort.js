@@ -61,4 +61,4 @@ const ProductSortList = [
     }
 ]
 
-export default Mock.mock('/header/productSortNav/productSort/', 'get', ProductSortList)
+export default Mock.mock('/header/productSortNav/productSort', 'get', ProductSortList)

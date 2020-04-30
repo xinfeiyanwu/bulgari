@@ -128,6 +128,7 @@ export default {
                     ProductSortNavName: name,
                 }
             });
+            console.log(type)
         },
         hiddenProductSort(){
             this.$store.dispatch('hiddenProductSort');
@@ -142,10 +143,9 @@ export default {
         }
     },
     created(){
-        this.$Axios.get('/header/productSortNav/')
+        this.$request({url: '/header/productSortNav'})
             .then((response) => {
-                let data = response.data;
-                this.contentNav = data;
+                this.contentNav = response;
             })
     },
     mounted(){
@@ -160,6 +160,7 @@ export default {
   top: 0;
   width: 100%;
   border-bottom: 1px solid #e6e6e6;
+  height: 179px;
   background: #fff;
   z-index: 1000;
 

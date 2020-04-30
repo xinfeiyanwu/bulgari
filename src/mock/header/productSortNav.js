@@ -14,4 +14,4 @@ const contentNav = [
     { type:'hotel', name: '宝格丽酒店及度假村', path: '/' },
 ]
 
-export default Mock.mock('/header/productSortNav/', 'get', contentNav);
+export default Mock.mock('/header/productSortNav', 'get', contentNav);

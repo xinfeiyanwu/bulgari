@@ -350,9 +350,9 @@ export default {
         }
     },
     mounted(){
-        this.$Axios.get(`/shopping?productNO=${this.$route.query.productNO}`)
+        this.$request({url: '/shopping?productNO=${this.$route.query.productNO}'})
             .then(res => {
-                this.dataSource = res.data;
+                this.dataSource = res;
                 //console.log(this.dataSource);
             })
             .then(()=>{

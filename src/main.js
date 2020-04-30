@@ -4,11 +4,11 @@ import router from './router'
 import store from './store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import Axios from 'axios'
+import {request} from './api/request.js'
 
 Vue.use(ElementUI)
 
-Vue.prototype.$Axios = Axios
+Vue.prototype.$request = request
 Vue.config.productionTip = false
 
 new Vue({

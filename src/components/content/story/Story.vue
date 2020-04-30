@@ -109,11 +109,11 @@ export default {
         getDataList(type){
             this.loading = true;
             setTimeout(()=>{
-                this.$Axios.get(`/story`,{
+                this.$request({
+                    url: '/story',
                     params: {type}
                 }).then((res) => {
-                    let data = res.data;
-                    this.dataList = data;
+                    this.dataList = res;
                     this.loading = false;
                 });
             }, 2000)
@@ -136,7 +136,7 @@ export default {
     font-weight: 200;
 }
 .Story{
-    margin-top: 168px;
+    margin-top: 180px;
 
     .storyNav{
         padding: 20px 0;

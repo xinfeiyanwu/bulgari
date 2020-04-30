@@ -49,7 +49,7 @@ export default {
 }
 
 .LinkWe{
-    margin-top: 160px;
+    margin-top: 180px;
     text-align: center;
     h1{
         padding: 47px 0 33px;

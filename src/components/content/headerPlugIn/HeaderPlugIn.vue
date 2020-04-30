@@ -14,7 +14,7 @@ export default {
 
 <style lang="less" scoped>
 .HeaderPlugIn{
-    margin-top: 110px;
+    margin-top: 180px;
     text-align: center;
 }
 </style>

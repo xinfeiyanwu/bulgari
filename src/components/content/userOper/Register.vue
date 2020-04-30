@@ -123,9 +123,9 @@ export default {
             }, 1000)
 
             setTimeout(()=>{
-                this.$Axios.get(`/resister/getVerificatCode`)
+                this.$request({url: '/resister/getVerificatCode'})
                     .then((res) => {
-                        this.VerificatCode=res.data;
+                        this.VerificatCode=res;
                         this.sendVerifText = '发送验证码';
                         clearInterval(this.Timer);
                         this.$message({
@@ -156,7 +156,7 @@ export default {
         },
         registerHandle(){
             if(this.VerificatCode!='' && this.number!=''){
-                this.$Axios.post('/resister', {VerificatCode:this.VerificatCode})
+                this.$request().post('/resister', {VerificatCode:this.VerificatCode})
                 .then((res) => {debugger
                     if(res.data.code==200) 
                     this.$router.push({

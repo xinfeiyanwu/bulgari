@@ -39,13 +39,13 @@ export default {
     },
     methods: {
         More(){
-            if(!this.spreadMore){
-                 this.spreadMore = !this.spreadMore;
-                this.packMore = false;
-            }else{
-               this.spreadMore = false;
-                this.packMore = !this.packMore;
-            }
+            // if(!this.spreadMore){
+            //      this.spreadMore = !this.spreadMore;
+            //     this.packMore = false;
+            // }else{
+            //    this.spreadMore = false;
+            //     this.packMore = !this.packMore;
+            // }
         }
     }
 }
@@ -54,7 +54,7 @@ export default {
 <style lang="less" scoped>
 @height: 40px;
 .SearchShop{
-    margin-top: 183px;
+    margin-top: 180px;
 
     h1{
         padding: 12px 0 58px;
@@ -119,37 +119,37 @@ export default {
         border-right: 10px solid transparent;
     }
 
-    .spreadMore{
-        animation-name:move;
-        animation-duration:1s;
-        animation-fill-mode:forwards;
+    // .spreadMore{
+    //     animation-name:move;
+    //     animation-duration:3s;
+    //     animation-fill-mode:forwards;
         
-        @keyframes move {
-            from{
-                transform: rotate(0deg)
+    //     @keyframes move {
+    //         from{
+    //             transform: rotate(0deg)
 
-            }
+    //         }
 
-            to{
-                transform: rotate(180deg)
-            }
-        }
-    }
-    .packMore{
-        animation-name:move;
-        animation-duration:100s;
-        animation-fill-mode:forwards;
+    //         to{
+    //             transform: rotate(180deg)
+    //         }
+    //     }
+    // }
+    // .packMore{
+    //     animation-name:move;
+    //     animation-duration:5s;
+    //     animation-fill-mode:forwards;
         
-        @keyframes move {
-            from{
-                transform: rotate(180deg)
-            }
+    //     @keyframes move {
+    //         from{
+    //             transform: rotate(180deg)
+    //         }
 
-            to{
-                transform: rotate(0deg)
-            }
-        }
-    }
+    //         to{
+    //             transform: rotate(0deg)
+    //         }
+    //     }
+    // }
 }
 </style>
 

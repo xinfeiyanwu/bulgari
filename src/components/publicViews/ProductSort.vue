@@ -63,10 +63,9 @@ export default {
         },
     },
     created(){
-        this.$Axios.get('/header/productSortNav/productSort/', 'get')
+        this.$request({url: '/header/productSortNav/productSort'})
             .then((response) => {
-                let data = response.data;
-                this.ProductSortList = data;
+                this.ProductSortList = response;
                 //无法知道数据啥时候收到，使用nextTick保证数据收到之后，mountd已经完成，保证不会报错
                 this.$nextTick(() => {
                     this.pictureShowHandle(0,0);

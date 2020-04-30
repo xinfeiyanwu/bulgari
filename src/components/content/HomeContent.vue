@@ -106,25 +106,24 @@ export default {
     }
   },
   created(){
-    this.$Axios.get('/HomeContentList')
+    this.$request({url: '/HomeContentList'})
       .then(res => {
-        let data = res.data;
-        for (let key in data) {
+        for (let key in res) {
           if (key == "HomeBannerImg") {
            // debugger;
-            data[key] = require(`../../assets/homePage/${data['HomeBannerImg']}.png`);
+            res[key] = require(`../../assets/homePage/${res['HomeBannerImg']}.png`);
           }
           else if(key == "swiperList") {
-            data[key].forEach((v,i) => {
-              data[key][i].img = require(`../../assets/homePage/carousel/${v.img}.png`);
+            res[key].forEach((v,i) => {
+              res[key][i].img = require(`../../assets/homePage/carousel/${v.img}.png`);
             })
           }
           else if(key == "FIOREVER") {
-            data[key].img = require(`../../assets/homePage/${data[key].img}.jpg`);
+            res[key].img = require(`../../assets/homePage/${res[key].img}.jpg`);
           }
         }
-        this.HomeContentList = { ...this.HomeContentList, ...data };
-        //console.log(data)
+        this.HomeContentList = { ...this.HomeContentList, ...res };
+        //console.log(res)
         this.$nextTick(() => {
           this.initSwiper();
         })
@@ -139,7 +138,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 #HomeContent{
-  padding-top: 175px;
+  padding-top: 180px;
 
   #hotWord{
     padding: 10px;

@@ -108,7 +108,7 @@ export default {
                 'psw': this.psw
             }); 
 
-            this.$Axios.post('/login', encryptedData)
+            this.$request().post('/login', encryptedData)
                 .then(res => {
                     const {code, msg, token, num} = res.data;
                     console.log(res);

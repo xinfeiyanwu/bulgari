@@ -65,10 +65,9 @@ export default {
         }
     },
     created(){
-        this.$Axios.get('/customList')
+        this.$request({url: '/customList'})
             .then((response) => {
-                let data = response.data;
-                this.customList = [...this.customList, ...data];
+                this.customList = [...this.customList, ...response];
                 //console.log( this.customList)
             })
     },
@@ -76,7 +75,7 @@ export default {
     },
     watch: {
         customValue: function(){
-           this.$Axios.get('/cityList')
+           this.$request({url: '/cityList'})
             .then((response) => {
                 this.cityList.splice(1,this.cityList.length-1);
                 let data = response.data;
