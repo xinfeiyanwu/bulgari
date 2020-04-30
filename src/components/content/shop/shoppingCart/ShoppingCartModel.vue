@@ -200,9 +200,9 @@ export default {
             height: 20px;
           }
         }
-        .productPhoto{
+        // .productPhoto{
 
-        }
+        // }
         .productSeriesName{
           height: 92px;
           display: flex;
