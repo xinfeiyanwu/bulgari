@@ -66,6 +66,7 @@
 import 'vuex';
 import '@/mock/userOperation/login.js'
 import { JSEncrypt } from 'jsencrypt'
+import {publicKey,encryptedData as encrypted} from '@/api/unit.js'
 export default {
     name: 'login',
     data(){
@@ -75,14 +76,6 @@ export default {
             rememberValue: '',
             numberNoticeText: '',
             pswNoticeText: '',
-            pubkey: `
-                    -----BEGIN PUBLIC KEY-----
-                    MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQD3B3cnlK336lHQje53+mIh/fHz
-                    GFBAtH6alqDXa4LmuTMuwBQqBBIg+HIIb9001wmcMFQwueIG//vV112USWeZBOv1
-                    gK86uDPNdsT1dKKQiVTK04IXxrlla21Wg3A23/3/unFoyaU73RhLuR0yBqcL61Ot
-                    GPCyw3bTD+39Bm5BUQIDAQAB
-                    -----END PUBLIC KEY-----
-                    `
         }
     },
     methods: {
@@ -103,14 +96,14 @@ export default {
                 })
             }
 
-            const encryptedData = this.encryptedData(this.pubkey, {
+            const encryptedData = encrypted(publicKey, {
                 'Number': this.number,
                 'psw': this.psw
             }); 
 
             this.$request().post('/login', encryptedData)
                 .then(res => {
-                    const {code, msg, token, num} = res.data;
+                    const {code, msg, token, num} = res;
                     console.log(res);
                     if(code==200){
                         this.$message({
@@ -141,19 +134,6 @@ export default {
             //console.log(str)
             document.cookie = str;
         },
-        //加密
-        encryptedData(publicKey, data) {
-            // 新建JSEncrypt对象
-            let encryptor = new JSEncrypt();
-            // 设置公钥
-            encryptor.setPublicKey(publicKey);
-            // 加密数据
-            for(let key in data){
-                data[key] = encryptor.encrypt(data[key]);
-            }
-           // console.log(data);
-            return data;
-        }
     },
     watch: {
         rememberValue: function(newValue){
