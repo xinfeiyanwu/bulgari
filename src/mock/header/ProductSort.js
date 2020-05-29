@@ -58,7 +58,7 @@ const ProductSortList = [
                 ImgUrl: require('../../assets/header/productSort/pictureShow_5.jpg'),
             },
         ]
-    }
+    },
 ]
 
 export default Mock.mock('/header/productSortNav/productSort', 'get', ProductSortList)

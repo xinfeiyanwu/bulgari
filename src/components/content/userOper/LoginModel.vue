@@ -65,7 +65,7 @@
 <script>
 import 'vuex';
 import '@/mock/userOperation/login.js'
-import {publicKey,encryptedData as encrypted} from '@/api/unit.js'
+import {publicKey,encryptedData as encrypted} from '@/unit/unit.js'
 
 export default {
     name: 'login',

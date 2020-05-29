@@ -1,77 +1,62 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import UserOper from '../components/content/userOper/UserOper.vue'
-import Register from '../components/content/userOper/Register.vue'
-import CompleteData from '../components/content/userOper/CompleteData.vue'
-import Login from '../components/content/userOper/Login.vue'
-import HeaderPlugIn from '../components/content/headerPlugIn/HeaderPlugIn.vue'
-import SearchShop from '../components/content/headerPlugIn/SearchShop.vue'
-import LinkWe from '../components/content/headerPlugIn/LinkWe.vue'
-import Serve from '../components/content/headerPlugIn/Serve.vue'
-import ServeContian from '../components/content/headerPlugIn/serveDetial/ServeContian.vue'
-import ServeDetail from '../components/content/headerPlugIn/serveDetial/ServeDetail.vue'
-import ServeAccess from '../components/content/headerPlugIn/serveDetial/ServeAccess.vue'
-import ServeJewell from '../components/content/headerPlugIn/serveDetial/ServeJewell.vue'
-import ServeWatch from '../components/content/headerPlugIn/serveDetial/ServeWatch.vue'
-import ShoppingSelect from '../components/content/shop/ShoppingSelect.vue'
-import Shopping from '../components/content/shop/Shopping.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    component: () => import('../components/Home.vue'),
+    component: () => import(/* webpackChunkName: "Home" */'../components/Home.vue'),
     children: [
       {
         path: '/',
         name: 'HomeContent',
-        component: () => import('../components/content/HomeContent.vue')
+        component: () => import(/* webpackChunkName: "Home" */'../components/content/HomeContent.vue')
       },
       //故事
       {
         path: '/story/:type',
         name: 'Story',
-        component: () => import('../components/content/story/Story.vue')
+        component: () => import(/* webpackChunkName: "story" */'../components/content/story/Story.vue')
       },
       //高级珠宝
       {
         path: '/highJewellery',
         name: 'HighJewellery',
-        component: () => import('../components/content/highJewellery/HighJewellery.vue')
+        component: () => import(/* webpackChunkName: "HighJewellery" */ '../components/content/highJewellery/HighJewellery.vue')
       },
       //选择购物类型
       {
         path: '/ShoppingSelect',
         name: 'ShoppingSelect',
-        component: () => import('../components/content/shop/ShoppingSelect.vue')
+        component: () => import(/* webpackChunkName: "Shopping" */ '../components/content/shop/ShoppingSelect.vue')
       },
       //购买商品
       {
         path: '/Shopping',
         name: 'Shopping',
-        component: () => import('../components/content/shop/Shopping.vue')
+        component: () => import(/* webpackChunkName: "Shopping" */ '../components/content/shop/Shopping.vue')
       },
       //用户信息操作
       {
         path: '/userOper/',
         name: 'userOper',
-        component: () => import('../components/content/userOper/UserOper.vue'),
+        component: () => import(/* webpackChunkName: "userOper" */ '../components/content/userOper/UserOper.vue'),
         children: [
           {
             path: '/userOper/register/',
             name: 'Register',
-            component: () => import('../components/content/userOper/Register.vue')
+            component: () => import(/* webpackChunkName: "userOper" */ '../components/content/userOper/Register.vue')
           },
           {
             path: '/userOper/CompleteData/',
             name: 'CompleteData',
-            component: () => import('../components/content/userOper/CompleteData.vue')
+            component: () => import(/* webpackChunkName: "userOper" */ '../components/content/userOper/CompleteData.vue')
           },
           {
             path: '/userOper/Login/',
             name: 'Login',
-            component: () => import('../components/content/userOper/Login.vue')
+            component: () => import(/* webpackChunkName: "userOper" */ '../components/content/userOper/Login.vue')
           }
         ]
       },
@@ -79,47 +64,47 @@ const routes = [
       {
         path: '/headerPlugIn/',
         name: 'HeaderPlugIn',
-        component: () => import('../components/content/headerPlugIn/HeaderPlugIn.vue'),
+        component: () => import(/* webpackChunkName: "HeaderPlugIn" */ '../components/content/headerPlugIn/HeaderPlugIn.vue'),
         children: [
           {
             path: '/headerPlugIn/SearchShop/',
             name: 'SearchShop',
-            component: () => import('../components/content/headerPlugIn/SearchShop.vue')
+            component: () => import(/* webpackChunkName: "HeaderPlugIn" */'../components/content/headerPlugIn/SearchShop.vue')
           },
           {
             path: '/headerPlugIn/LinkWe/',
             name: 'LinkWe',
-            component: () => import('../components/content/headerPlugIn/LinkWe.vue')
+            component: () => import(/* webpackChunkName: "HeaderPlugIn" */'../components/content/headerPlugIn/LinkWe.vue')
           },
           {
             path: '/headerPlugIn/Serve/',
             name: 'Serve',
-            component: () => import('../components/content/headerPlugIn/Serve.vue'),
+            component: () => import(/* webpackChunkName: "HeaderPlugIn" */'../components/content/headerPlugIn/Serve.vue'),
             children: [
               {
                 path: '/headerPlugIn/Serve/',
                 name: 'ServeContian',
-                component: () => import('../components/content/headerPlugIn/serveDetial/ServeContian.vue')
+                component: () => import(/* webpackChunkName: "HeaderPlugIn" */'../components/content/headerPlugIn/serveDetial/ServeContian.vue')
               },
               {
                 path: '/headerPlugIn/Serve/ServeDetail',
                 name: 'ServeDetail',
-                component: () => import('../components/content/headerPlugIn/serveDetial/ServeDetail.vue'),
+                component: () => import(/* webpackChunkName: "HeaderPlugIn" */'../components/content/headerPlugIn/serveDetial/ServeDetail.vue'),
                 children: [
                   {
                     path: '/headerPlugIn/Serve/ServeDetail/ServeAccess/:type',
                     name: 'ServeAccess',
-                    component: () => import('../components/content/headerPlugIn/serveDetial/ServeAccess.vue')
+                    component: () => import(/* webpackChunkName: "HeaderPlugIn" */'../components/content/headerPlugIn/serveDetial/ServeAccess.vue')
                   },
                   {
                     path: '/headerPlugIn/Serve/ServeDetail/ServeWatch/:type',
                     name: 'ServeWatch',
-                    component: () => import('../components/content/headerPlugIn/serveDetial/ServeWatch.vue')
+                    component: () => import(/* webpackChunkName: "HeaderPlugIn" */'../components/content/headerPlugIn/serveDetial/ServeWatch.vue')
                   },
                   {
                     path: '/headerPlugIn/Serve/ServeDetail/ServeJewell/:type',
                     name: 'ServeJewell',
-                    component: () => import('../components/content/headerPlugIn/serveDetial/ServeJewell.vue')
+                    component: () => import(/* webpackChunkName: "HeaderPlugIn" */'../components/content/headerPlugIn/serveDetial/ServeJewell.vue')
                   }
                 ]
               }
@@ -132,7 +117,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes,
   scrollBehavior(to, from, savedPosition){

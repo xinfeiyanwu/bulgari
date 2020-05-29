@@ -9,7 +9,7 @@ export function request (config){
         (config) =>{
             return config;
         }, (err) => {
-            console.log(err)
+            //console.log(err)
         }
     )
 
@@ -17,7 +17,7 @@ export function request (config){
         (response) => {
             return response.data;
         }, (err) => {
-            console.log(err);
+            //console.log(err);
         }
     )
 
